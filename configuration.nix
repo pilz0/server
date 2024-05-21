@@ -195,21 +195,22 @@ systemd.timers."backup" = {
       Unit = "backup.service";
     };
 };
-services.tor = {
-  enable = true;
-  openFirewall = true;
-  relay = {
-    enable = true;
-    role = "relay";
-  };
-  settings = {
-    ContactInfo = "toradmin@ketamin.trade";
-    Nickname = "serva";
-    ORPort = 9001 "IPv4Only";
-    ControlPort = 9051;
-    BandWidthRate = "10 MBytes";
-  };
-};
+#services.tor = {
+#  enable = true;
+#  openFirewall = true;
+#  relay = {
+#    enable = true;
+#    role = "relay";
+#  };
+#  settings = {
+#    ContactInfo = "toradmin@ketamin.trade";
+#    Nickname = "serva";
+#    ORPort = 9001 "IPv4Only";
+#    ControlPort = 9051;
+#    BandWidthRate = "10 MBytes";
+#     
+#  };
+# };
       # Open ports in the firewall.
    networking.firewall.allowedTCPPorts = [ 1100 11000 81 8080 443 80 22 3000 8443 1337 3001 9090 9100 1312 ];
    networking.firewall.allowedUDPPorts = [ 1100 11000 81 8080 443 80 22 3000 8443 1337 3001 9090 9100 1312 ];
