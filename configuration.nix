@@ -205,7 +205,7 @@ services.tor = {
   settings = {
     ContactInfo = "toradmin@ketamin.trade";
     Nickname = "serva";
-    ORPort = 9001;
+    ORPort = 9001 IPv4Only;
     ControlPort = 9051;
     BandWidthRate = "10 MBytes";
   };
