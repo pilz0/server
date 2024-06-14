@@ -96,6 +96,7 @@
     alacritty
     cmatrix
     btop
+    gitlab-runner
     wget
     rclone
     restic
