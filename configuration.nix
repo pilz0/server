@@ -217,9 +217,9 @@ systemd.timers."backup" = {
 # };
 
 services.jellyfin = {
-  enable = true;
+ enable = true;
   openFirewall = true;
-  dataDir = "/home/marie/jellyfin_data";
+#  dataDir = "/home/marie/jellyfin_data";
 };
 
       # Open ports in the firewall.
