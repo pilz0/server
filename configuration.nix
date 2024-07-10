@@ -110,6 +110,9 @@
     curl
     ddclient
     docker-compose
+    jellyfin
+    jellyfin-web
+    jellyfin-ffmpeg
     ];
     virtualisation.docker.enable = true;
     virtualisation.containerd.enable = true;
@@ -212,6 +215,13 @@ systemd.timers."backup" = {
 #     
 #  };
 # };
+
+services.jellyfin = {
+  enable = true;
+  openFirewall = true;
+  services.jellyfin.dataDir = "/home/marie/jellyfin_data";
+};
+
       # Open ports in the firewall.
    networking.firewall.allowedTCPPorts = [ 1100 11000 81 8080 443 80 22 3000 8443 1337 3001 9090 9100 1312 ];
    networking.firewall.allowedUDPPorts = [ 1100 11000 81 8080 443 80 22 3000 8443 1337 3001 9090 9100 1312 ];
