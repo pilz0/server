@@ -199,36 +199,34 @@ systemd.timers."backup" = {
       Unit = "backup.service";
     };
 };
-#services.tor = {
-#  enable = true;
-#  openFirewall = true;
-#  relay = {
-#    enable = true;
-#    role = "relay";
-#  };
-#  settings = {
-#    ContactInfo = "toradmin@ketamin.trade";
-#    Nickname = "serva";
-#    ORPort = 9001 "IPv4Only";
-#    ControlPort = 9051;
-#    BandWidthRate = "10 MBytes";
-#     
-#  };
-# };
 
 services.jellyfin = {
- enable = true;
+  enable = true;
   openFirewall = true;
 #  dataDir = "/home/marie/jellyfin_data";
 };
+  # 1. enable vaapi on OS-level
+  nixpkgs.config.packageOverrides = pkgs: {
+    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+  };
+  hardware.graphics = { # hardware.opengl in 24.05
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      intel-vaapi-driver # previously vaapiIntel
+      vaapiVdpau
+      intel-compute-runtime # OpenCL filter support (hardware tonemapping and subtitle burn-in)
+      intel-media-sdk # QSV up to 11th gen
+    ];
+  };
 
-      # Open ports in the firewall.
-   networking.firewall.allowedTCPPorts = [ 1100 11000 81 8080 443 80 22 3000 8443 1337 3001 9090 9100 1312 ];
-   networking.firewall.allowedUDPPorts = [ 1100 11000 81 8080 443 80 22 3000 8443 1337 3001 9090 9100 1312 ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+# Open ports in the firewall.
+networking.firewall.allowedTCPPorts = [ 1100 11000 81 8080 443 80 22 3000 8443 1337 3001 9090 9100 1312 ];
+networking.firewall.allowedUDPPorts = [ 1100 11000 81 8080 443 80 22 3000 8443 1337 3001 9090 9100 1312 ];
+# Or disable the firewall altogether.
+# networking.firewall.enable = false;
 # NixOS Version
-  system.stateVersion = "23.11"; # Did you read the comment?
+system.stateVersion = "23.11"; # Did you read the comment?
 }
   ## github copilot wrote this
 #  I hope you can help me. 
