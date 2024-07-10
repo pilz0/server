@@ -45,7 +45,15 @@
       users.users.marie.isNormalUser = true;
       users.users.marie.description = "marie";
       users.users.marie.extraGroups = [ "networkmanager" "wheel" ];
-    
+      users.users.marie.openssh.authorizedKeys.keys = ["sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBTGgUYUsIAtcbZBqk5Mq0LH2T5KGFjdjAgNIwUf+/LBAAAABHNzaDo= pilz@framewok" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP6weqYi/f7nQzsCr11NVz/7cdmpSq7sU1N+Ag5jM45S daniel@underdesk" ];
+
+  # Jule
+      users.users.pizzladen.isNormalUser = true;
+      users.users.pizzladen.description = "pizzaladen";
+      users.users.pizzladen.createHome = true;
+      users.users.pizzaladen.home = "/home/pizzaladen";
+      users.users.pizzaladen.createHome = true;
+      users.users.pizzladen.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINQpiMvv+hp/LcEV4olyPTfODg6OpOLXUYFETQuJx/D/ pizzaladen@pizzaladen-HP-EliteBook-840-G1" "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBTGgUYUsIAtcbZBqk5Mq0LH2T5KGFjdjAgNIwUf+/LBAAAABHNzaDo= pilz@framewok"];
   #Services
   #zsh
     networking.networkmanager.enable = true;
@@ -58,9 +66,7 @@
       experimental-features = nix-command flakes
     '';
      };
-  # Maii keyy :3 
-  users.users.marie.openssh.authorizedKeys.keys = ["sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBTGgUYUsIAtcbZBqk5Mq0LH2T5KGFjdjAgNIwUf+/LBAAAABHNzaDo= pilz@framewok" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP6weqYi/f7nQzsCr11NVz/7cdmpSq7sU1N+Ag5jM45S daniel@underdesk
-" ];
+  users.users.marie.openssh.authorizedKeys.keys = ["sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBTGgUYUsIAtcbZBqk5Mq0LH2T5KGFjdjAgNIwUf+/LBAAAABHNzaDo= pilz@framewok" "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP6weqYi/f7nQzsCr11NVz/7cdmpSq7sU1N+Ag5jM45S daniel@underdesk" ];
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   #Docker
