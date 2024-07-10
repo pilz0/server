@@ -53,9 +53,7 @@
       users.users.pizzaladen.isNormalUser = true;
       users.users.pizzaladen.description = "pizzaladen";
       users.users.pizzaladen.createHome = true;
-      users.users.pizzaladen.isNormalUser = true;
       users.users.pizzaladen.home = "/home/pizzaladen";
-      users.users.pizzaladen.createHome = true;
       users.users.pizzaladen.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINW02E19w2YUO7d82WDHyMqfyUdIDCgjblwPJvgc1wzF pizzaladen@pizzaladen-HP-EliteBook-840-G1" "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBTGgUYUsIAtcbZBqk5Mq0LH2T5KGFjdjAgNIwUf+/LBAAAABHNzaDo= pilz@framewok"];
   #Services
   #zsh
