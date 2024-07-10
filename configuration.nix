@@ -214,7 +214,7 @@ services.jellyfin = {
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
-  hardware.graphics = { # hardware.opengl in 24.05
+  hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [
       intel-media-driver
