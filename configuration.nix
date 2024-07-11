@@ -201,7 +201,6 @@ systemd.timers."backup" = {
     };
 };
 
-services.tailscale.enable = true;
 systemd.services."prune" = {
   script = ''${pkgs.restic}/bin/restic -r rclone:smb:/Buro/backup forget --keep-last 2 --prune -p /home/marie/restic/password --verbose
   '';
@@ -214,7 +213,7 @@ systemd.timers."prune" = {
   wantedBy = [ "prune.target" ];
     timerConfig = {
       OnCalendar = "Sun 14:00:00";
-      Unit = "backup.service";
+      Unit = "prune.service";
     };
 };
 
