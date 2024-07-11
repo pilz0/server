@@ -185,7 +185,7 @@ systemd.timers."rebuild" = {
 };
 services.tailscale.enable = true;
 systemd.services."backup" = {
-  script = ''${pkgs.restic}/restic -r rclone:smb:/Buro/backup backup -p /home/marie/restic/password --verbose /home /var/lib/docker
+  script = ''${pkgs.restic}/bin/restic -r rclone:smb:/Buro/backup backup -p /home/marie/restic/password --verbose /home /var/lib/docker
   '';
   serviceConfig = {
     Type = "oneshot";
