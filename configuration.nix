@@ -54,7 +54,7 @@
       users.users.pizzaladen.description = "pizzaladen";
       users.users.pizzaladen.createHome = true;
       users.users.pizzaladen.home = "/home/pizzaladen";
-      users.users.pizzaladen.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINW02E19w2YUO7d82WDHyMqfyUdIDCgjblwPJvgc1wzF pizzaladen@pizzaladen-HP-EliteBook-840-G1" "sk-ssh-ed25519@openssh.com AAAAGnNrLXNzaC1lZDI1NTE5QG9wZW5zc2guY29tAAAAIBTGgUYUsIAtcbZBqk5Mq0LH2T5KGFjdjAgNIwUf+/LBAAAABHNzaDo= pilz@framewok"];
+      users.users.pizzaladen.openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINW02E19w2YUO7d82WDHyMqfyUdIDCgjblwPJvgc1wzF pizzaladen@pizzaladen-HP-EliteBook-840-G1" "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC6VDJ9roxToSC8qT+zawLauEDWnC2+W/b/jw19Wiq+6ug+Ey725sxl62nMxI1INpUCkYUSbXlziWA1Ml0XT/jgDZ4CPbKq5yAoziY6UvXZkRDTuhXLn4UViUiEqn9Y2X9t5CtU7TON8vp7SIIGWlJXz1FF9d/05KNEYBTyNY7HW+m4JCZ8CZ8rIgdZ25jaOIAMtiOLiiva7l3bgFYopOnftSlvlndvymaLGv67uraTPRXHaT5oLCa/GkiSC1jwhWIQ2LmD5YXAoUUYpODBBjXNOE6ULkq2xO7yJdc39MeqkRcD6fwCXjWcY9GAn2BGJWO3Iss2em6ObaKMvD4QiGzK36e43zj80YTuUh5+pSn4tqheKkl73bW2Savw/7HZ8sI21CjoZYSqoKTXhxYDKz7YycwAkjcN/dai6wzTt2mbZ4plJVsaFo/b42tkYUGVnvbFGIiBHv3ALHgpyzsqkP3AiEqVvZFb2OYa/5U32e5PVszBrIML9pgWOCZyumMtqjw4FMPtf3bGcSKG54T8QR6uSuL5YVakQiVZOxBRBDv9TVGjkrfhh8U/DxVlV0HJ66ExY3VgMZDcqnOuexoun6HRr0KG7xil3YBlmJnGkyBeemeJ/CV+nBRelPYCZ/+X9C3JEIi4ACYYxOqOGwZ8JGtrDroFwdBTtI6LD6mzgQ9Dew== jule@DESKTOP-ABQ1DJO" ];
   #Services
   #zsh
     networking.networkmanager.enable = true;
@@ -184,39 +184,55 @@ systemd.timers."rebuild" = {
   };
 };
 services.tailscale.enable = true;
-systemd.services."backup" = {
-  script = ''${pkgs.restic}/bin/restic -r rclone:smb:/Buro/backup backup -p /home/marie/restic/password --verbose /home /var/lib/docker /srv
-  '';
-  serviceConfig = {
-    Type = "oneshot";
-    User = "root";
+#systemd.services."backup" = {
+  #script = ''${pkgs.restic}/bin/restic -r rclone:smb:/Buro/backup backup -p /home/marie/restic/password --verbose /home /var/lib/docker /srv
+ # '';
+ # serviceConfig = {
+   # Type = "oneshot";
+  #  User = "root";
+ # };
+#};
+#systemd.timers."backup" = {
+ # wantedBy = [ "timers.target" ];
+   # timerConfig = {
+   # #  OnBootSec = "10m";
+   #   OnUnitActiveSec = "24h";
+  #    Unit = "backup.service";
+ #   };
+#};
+
+#systemd.services."prune" = {
+ # script = ''${pkgs.restic}/bin/restic -r rclone:smb:/Buro/backup forget --keep-last 2 --prune -p /home/marie/restic/password --verbose
+ # '';
+  #serviceConfig = {
+  #  Type = "oneshot";
+  #  User = "root";
+ # };
+#};
+#systemd.timers."prune" = {
+ # wantedBy = [ "prune.target" ];
+  #  timerConfig = {
+   #   OnCalendar = "Sun 14:00:00";
+    #  Unit = "prune.service";
+    #};
+#};
+
+
+services.tor = {
+  enable = true;
+  openFirewall = true;
+  relay = {
+    enable = true;
+    role = "relay";
+  };
+  settings = {
+    ContactInfo = "darmstadt@fridaysforfuture.de";
+    Nickname = "ketamintrade";
+    ORPort = 9001;
+    ControlPort = 9051;
+    BandWidthRate = "1 MBytes";
   };
 };
-systemd.timers."backup" = {
-  wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnBootSec = "10m";
-      OnUnitActiveSec = "24h";
-      Unit = "backup.service";
-    };
-};
-
-systemd.services."prune" = {
-  script = ''${pkgs.restic}/bin/restic -r rclone:smb:/Buro/backup forget --keep-last 2 --prune -p /home/marie/restic/password --verbose
-  '';
-  serviceConfig = {
-    Type = "oneshot";
-    User = "root";
-  };
-};
-systemd.timers."prune" = {
-  wantedBy = [ "prune.target" ];
-    timerConfig = {
-      OnCalendar = "Sun 14:00:00";
-      Unit = "prune.service";
-    };
-};
-
 
 services.jellyfin = {
   enable = true;
