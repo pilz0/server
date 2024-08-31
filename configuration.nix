@@ -303,7 +303,7 @@ services.nginx = {
 
 security.acme = {
   acceptTerms = true;
-  defaults.email = "marie0@riseup.net";
+  defaults.email = "acme@ketamin.trade";
 };
 
 services.jellyfin = {
