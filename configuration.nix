@@ -66,7 +66,35 @@
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-     };
+     }; 
+  services.grafana = {
+    enable = true;
+    settings.server = {
+         domain = "grafana.ketamin.trade";
+   	 http_port = 3001;
+   	 http_addr = "127.0.0.1";
+    };
+ };
+  services.prometheus = {
+    scrapeConfigs = [
+      {
+        job_name = "nodes";
+        scrape_interval = "2s";
+        static_configs = [{
+          targets = [ "10.10.1.25:9100" "vps.ketamin.trade:9100" "vps2.ketamin.trade:9100" "shit.ketamin.trade:9100" "localhost:9100" ];
+        }];
+      }
+    ];
+    enable = true;
+    port = 1312;
+    exporters = {
+      node = {
+        enable = true;
+        enabledCollectors = [ "systemd" ];
+        port = 9100;
+      };
+    };
+  };  
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   #Docker
@@ -230,7 +258,7 @@ services.tor = {
     Nickname = "ketamintrade";
     ORPort = 9001;
     ControlPort = 9051;
-    BandWidthRate = "1 MBytes";
+    BandWidthRate = "2 MBytes";
   };
 };
 
