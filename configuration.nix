@@ -72,7 +72,14 @@
     settings.server = {
          domain = "grafana.ketamin.trade";
    	 http_port = 3001;
-   	 http_addr = "127.0.0.1";
+   	 http_addr = "[::1]";
+      "auth.anonymous" = {
+        enabled = true;
+        org_name = "Main Org.";
+        org_role = "Viewer";
+      };
+    };
+
     };
  };
   services.prometheus = {
@@ -183,19 +190,7 @@ services.spotifyd.enable = true;
   #git  
     programs.git.config.user.name = "pilz0";
     programs.git.config.user.email = "marie0@riseup.net";
-# Autoupdate 
-system.autoUpgrade = {
-  enable = true;
-  dates = "hourly";
-  allowReboot = false; 
-  flake = "github:pilz0/server";
-  flags = [
-    "--update-input"
-    "nixpkgs"
-    "-L" # print build logs
-  ];
-  randomizedDelaySec = "45min";
-};
+
   environment.sessionVariables.NIXPKGS_ALLOW_UNFREE="1"; 
 # Openssh
   services.openssh.enable = true;
@@ -204,13 +199,6 @@ system.autoUpgrade = {
     # dyndns
 nix.optimise.automatic = true;
 nix.optimise.dates = [ "03:45" ];
-systemd.timers."rebuild" = {
-  wantedBy = [ "timers.target" ];
-  timerConfig = {
-      OnCalendar = "daily";
-      Persistent = true; 
-  };
-};
 services.tailscale.enable = true;
 #systemd.services."backup" = {
   #script = ''${pkgs.restic}/bin/restic -r rclone:smb:/Buro/backup backup -p /home/marie/restic/password --verbose /home /var/lib/docker /srv
@@ -228,23 +216,6 @@ services.tailscale.enable = true;
   #    Unit = "backup.service";
  #   };
 #};
-
-#systemd.services."prune" = {
- # script = ''${pkgs.restic}/bin/restic -r rclone:smb:/Buro/backup forget --keep-last 2 --prune -p /home/marie/restic/password --verbose
- # '';
-  #serviceConfig = {
-  #  Type = "oneshot";
-  #  User = "root";
- # };
-#};
-#systemd.timers."prune" = {
- # wantedBy = [ "prune.target" ];
-  #  timerConfig = {
-   #   OnCalendar = "Sun 14:00:00";
-    #  Unit = "prune.service";
-    #};
-#};
-
 
 services.tor = {
   enable = true;
@@ -271,7 +242,7 @@ services.nginx = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {
-        proxyPass = "http://127.0.0.1:3001";
+        proxyPass = "http://localhost:3001";
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
@@ -279,7 +250,7 @@ services.nginx = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {
-        proxyPass = "http://127.0.0.1:1100";
+        proxyPass = "http://localhost:1100";
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
@@ -291,15 +262,6 @@ services.nginx = {
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
-    virtualHosts."forms.flohannes.de" =  {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://10.10.1.9:1337";
-        proxyWebsockets = true; # needed if you need to use WebSocket
-      };
-    };
-};
 
 security.acme = {
   acceptTerms = true;
