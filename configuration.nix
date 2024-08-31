@@ -301,6 +301,11 @@ services.nginx = {
     };
 };
 
+security.acme = {
+  acceptTerms = true;
+  defaults.email = "marie0@riseup.net";
+};
+
 services.jellyfin = {
   enable = true;
   openFirewall = true;
