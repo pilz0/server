@@ -70,15 +70,15 @@
   services.grafana = {
     enable = true;
     settings.server = {
-         domain = "grafana.ketamin.trade";
-   	 http_port = 3001;
-   	 http_addr = "[::1]";
-      "auth.anonymous" = {
+     domain = "grafana.ketamin.trade";
+     http_port = 3001;
+     http_addr = "[::1]";
+      };
+        "auth.anonymous" = {
         enabled = true;
         org_name = "Main Org.";
         org_role = "Viewer";
-    };
- };
+   };
 };
   services.prometheus = {
     scrapeConfigs = [
