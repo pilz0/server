@@ -69,7 +69,8 @@
      }; 
   services.grafana = {
     enable = true;
-    settings.server = {
+    settings = {
+     server = {
      domain = "grafana.ketamin.trade";
      http_port = 3001;
      http_addr = "[::1]";
@@ -78,7 +79,8 @@
         enabled = true;
         org_name = "Main Org.";
         org_role = "Viewer";
-   };
+     };
+  };
 };
   services.prometheus = {
     scrapeConfigs = [
