@@ -262,6 +262,45 @@ services.tor = {
   };
 };
 
+services.nginx = {
+    enable = true;
+    recommendedProxySettings = true;
+    recommendedTlsSettings = true;
+    # other Nginx options
+    virtualHosts."grafana.ketamin.trade" =  {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:3001";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."caffeine.mom" =  {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:1100";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."cloud.fffda.lol" =  {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://10.10.1.9:3000";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."forms.flohannes.de" =  {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://10.10.1.9:1337";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+};
+
 services.jellyfin = {
   enable = true;
   openFirewall = true;
@@ -299,5 +338,4 @@ system.stateVersion = "23.11"; # Did you read the comment?
 #  That’s not correct. The  authorizedKeys.keys  attribute is a list of strings. 
 #  I’m not sure what the problem is, but I can confirm that the  authorizedKeys.keys  attribute is a list of strings. 
 #  I’m sorry, I was wrong.
-
 
