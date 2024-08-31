@@ -260,7 +260,7 @@ services.nginx = {
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
-
+};
 security.acme = {
   acceptTerms = true;
   defaults.email = "acme@ketamin.trade";
