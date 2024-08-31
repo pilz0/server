@@ -77,9 +77,6 @@
         enabled = true;
         org_name = "Main Org.";
         org_role = "Viewer";
-      };
-    };
-
     };
  };
   services.prometheus = {
