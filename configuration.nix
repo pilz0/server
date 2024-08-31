@@ -79,6 +79,7 @@
         org_role = "Viewer";
     };
  };
+};
   services.prometheus = {
     scrapeConfigs = [
       {
