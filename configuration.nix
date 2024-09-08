@@ -221,7 +221,7 @@ services.unifi = {
   openFirewall = true;
 };
 services.prometheus.exporters.unifi = {
-enbale = true;
+enable = true;
 unifiUsername = "ReadOnlyUser";
 unifiPassword = "iknowthisispublic";
 unifiInsecure = true;
