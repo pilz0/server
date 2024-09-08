@@ -88,7 +88,7 @@
         job_name = "nodes";
         scrape_interval = "2s";
         static_configs = [{
-          targets = [ "10.10.1.25:9100" "vps.ketamin.trade:9100" "vps2.ketamin.trade:9100" "shit.ketamin.trade:9100" "localhost:9100" ];
+          targets = [ "10.10.1.25:9100" "vps.ketamin.trade:9100" "vps2.ketamin.trade:9100" "shit.ketamin.trade:9100" "localhost:9100" "[::]:9130" ];
         }];
       }
     ];
@@ -220,12 +220,11 @@ services.unifi = {
   enable = true;
   openFirewall = true;
 };
-services.prometheus.exporters.unifi = {
-enable = true;
-unifiUsername = "ReadOnlyUser";
-unifiPassword = "iknowthisispublic";
-unifiInsecure = true;
-unifiAddress = "http://localhost:8443";
+
+services.unpoller = {
+  enable = true;
+  unifi.dynamic = true;
+  unifi.defaults.url = "https://localhost:8443";
 };
 
 services.tor = {
