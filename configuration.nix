@@ -216,6 +216,17 @@ services.tailscale.enable = true;
   #    Unit = "backup.service";
  #   };
 #};
+services.unifi = {
+  enable = true;
+  openFirewall = true;
+};
+services.prometheus.exporters.unifi = {
+enbale = true;
+unifiUsername = "ReadOnlyUser";
+unifiPassword = "iknowthisispublic";
+unifiInsecure = true;
+unifiAddress = "http://localhost:8443";
+};
 
 services.tor = {
   enable = true;
