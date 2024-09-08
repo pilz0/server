@@ -262,7 +262,7 @@ services.nginx = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {
-        proxyPass = "http://localhost:1100";
+        proxyPass = "http://localhost:8096";
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
@@ -270,7 +270,7 @@ services.nginx = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {
-        proxyPass = "http://10.10.1.9:3000";
+        proxyPass = "http://10.10.1.9:1100";
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
