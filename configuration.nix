@@ -89,6 +89,12 @@
         scrape_interval = "2s";
         static_configs = [{
           targets = [ "10.10.1.25:9100" "vps.ketamin.trade:9100" "vps2.ketamin.trade:9100" "shit.ketamin.trade:9100" "localhost:9100" "[::]:9130" ];
+        
+        job_name = "unifi";
+        scrape_interval = "2s";
+        static_configs = [{
+          targets = [ "localhost:9130" ];
+
         }];
       }
     ];
@@ -223,8 +229,15 @@ services.unifi = {
 
 services.unpoller = {
   enable = true;
-  unifi.dynamic = true;
-  unifi.defaults.url = "https://localhost:8443";
+unifi = {
+    dynamic = true;
+     defaults = {
+        url = "https://localhost:8443";
+        user = "unpoller";
+        pass = "/srv/password";
+        verify_ssl = false;
+    }; 
+  };
 };
 
 services.tor = {
@@ -271,6 +284,14 @@ services.nginx = {
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://10.10.1.9:1100";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."unifi.ketamin.trade" =  {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://localhost:8080";
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
