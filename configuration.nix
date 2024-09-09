@@ -88,8 +88,11 @@
         job_name = "nodes";
         scrape_interval = "2s";
         static_configs = [{
-          targets = [ "10.10.1.25:9100" "vps.ketamin.trade:9100" "vps2.ketamin.trade:9100" "shit.ketamin.trade:9100" "localhost:9100" "[::]:9130" ];
-        
+          targets = [ "10.10.1.25:9100" "vps.ketamin.trade:9100" "vps2.ketamin.trade:9100" "shit.ketamin.trade:9100" "localhost:9100" ];
+
+        }];
+      }
+     {
         job_name = "unifi";
         scrape_interval = "2s";
         static_configs = [{
