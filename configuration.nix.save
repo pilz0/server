@@ -31,6 +31,8 @@
     LC_TIME = "de_DE.UTF-8";
   };
   console.keyMap = "de";
+  # Enable sound with pipewire.
+  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -67,19 +69,12 @@
      }; 
   services.grafana = {
     enable = true;
-    settings = {
-     server = {
-     domain = "grafana.ketamin.trade";
-     http_port = 3001;
-     http_addr = "::1";
-      };
-        "auth.anonymous" = {
-        enabled = true;
-        org_name = "Main Org.";
-        org_role = "Viewer";
-     };
-  };
-};
+    settings.server = {
+         domain = "grafana.ketamin.trade";
+   	 http_port = 3001;
+   	 http_addr = "10.10.1.9";
+    };
+ };
   services.prometheus = {
     scrapeConfigs = [
       {
@@ -87,15 +82,6 @@
         scrape_interval = "2s";
         static_configs = [{
           targets = [ "10.10.1.25:9100" "vps.ketamin.trade:9100" "vps2.ketamin.trade:9100" "shit.ketamin.trade:9100" "localhost:9100" ];
-
-        }];
-      }
-     {
-        job_name = "unifi";
-        scrape_interval = "2s";
-        static_configs = [{
-          targets = [ "localhost:9130" ];
-
         }];
       }
     ];
@@ -115,7 +101,6 @@
   #All my Programms :3
   environment.systemPackages = with pkgs; [
     htop
-    tmux
     busybox
     prometheus
     unzip
@@ -155,7 +140,6 @@
     picocom
     dnsmasq
     spotifyd
-    unifi8
     pipes
     curl
     ddclient
@@ -192,14 +176,26 @@ services.spotifyd.enable = true;
     programs.zsh.ohMyZsh.enable = true;
     programs.zsh.ohMyZsh.theme = "crunch";
     programs.zsh.autosuggestions.enable = true;
-    programs.zsh.shellAliases = { backup = "restic -r rclone:smb:/Buro/backup backup -p /home/marie/restic/password --verbose /home /var/lib/docker /srv";};
+    programs.zsh.shellAliases = { backup = "restic -r rclone:onedrive:/backup/server1 backup --verbose /home";};
     programs.zsh.shellAliases = { update = "sudo nix flake update /home/marie/server";};
     programs.zsh.shellAliases = { rebuild = "sudo nixos-rebuild --flake /home/marie/server switch";};
     users.defaultUserShell = pkgs.zsh;
   #git  
     programs.git.config.user.name = "pilz0";
     programs.git.config.user.email = "marie0@riseup.net";
-
+# Autoupdate 
+system.autoUpgrade = {
+  enable = true;
+  dates = "hourly";
+  allowReboot = false; 
+  flake = "github:pilz0/server";
+  flags = [
+    "--update-input"
+    "nixpkgs"
+    "-L" # print build logs
+  ];
+  randomizedDelaySec = "45min";
+};
   environment.sessionVariables.NIXPKGS_ALLOW_UNFREE="1"; 
 # Openssh
   services.openssh.enable = true;
@@ -208,6 +204,13 @@ services.spotifyd.enable = true;
     # dyndns
 nix.optimise.automatic = true;
 nix.optimise.dates = [ "03:45" ];
+systemd.timers."rebuild" = {
+  wantedBy = [ "timers.target" ];
+  timerConfig = {
+      OnCalendar = "daily";
+      Persistent = true; 
+  };
+};
 services.tailscale.enable = true;
 #systemd.services."backup" = {
   #script = ''${pkgs.restic}/bin/restic -r rclone:smb:/Buro/backup backup -p /home/marie/restic/password --verbose /home /var/lib/docker /srv
@@ -225,24 +228,23 @@ services.tailscale.enable = true;
   #    Unit = "backup.service";
  #   };
 #};
-services.unifi = {
-  enable = true;
-  openFirewall = true;
-  unifiPackage = pkgs.unifi8;
-};
 
-services.unpoller = {
-  enable = true;
-unifi = {
-    dynamic = true;
-     defaults = {
-        url = "https://localhost:8443";
-        user = "unpoller";
-        pass = "/srv/password";
-        verify_ssl = false;
-    }; 
-  };
-};
+#systemd.services."prune" = {
+ # script = ''${pkgs.restic}/bin/restic -r rclone:smb:/Buro/backup forget --keep-last 2 --prune -p /home/marie/restic/password --verbose
+ # '';
+  #serviceConfig = {
+  #  Type = "oneshot";
+  #  User = "root";
+ # };
+#};
+#systemd.timers."prune" = {
+ # wantedBy = [ "prune.target" ];
+  #  timerConfig = {
+   #   OnCalendar = "Sun 14:00:00";
+    #  Unit = "prune.service";
+    #};
+#};
+
 
 services.tor = {
   enable = true;
@@ -260,51 +262,6 @@ services.tor = {
   };
 };
 
-services.nginx = {
-    enable = true;
-    recommendedGzipSettings = true;
-    recommendedOptimisation = true;
-    recommendedProxySettings = true;
-    recommendedTlsSettings = true;
-    # other Nginx options
-    virtualHosts."grafana.ketamin.trade" =  {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://localhost:3001";
-        proxyWebsockets = true; # needed if you need to use WebSocket
-      };
-    };
-    virtualHosts."caffeine.mom" =  {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://localhost:8096";
-        proxyWebsockets = true; # needed if you need to use WebSocket
-      };
-    };
-    virtualHosts."cloud.fffda.lol" =  {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://10.10.1.9:1100";
-        proxyWebsockets = true; # needed if you need to use WebSocket
-      };
-    };
-    virtualHosts."unifi.ketamin.trade" =  {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "https://localhost:8443";
-        proxyWebsockets = true; # needed if you need to use WebSocket
-      };
-    };
-};
-security.acme = {
-  acceptTerms = true;
-  defaults.email = "acme@ketamin.trade";
-};
-
 services.jellyfin = {
   enable = true;
   openFirewall = true;
@@ -314,7 +271,7 @@ services.jellyfin = {
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
-  hardware.graphics = {
+  hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [
       intel-media-driver
@@ -342,4 +299,5 @@ system.stateVersion = "23.11"; # Did you read the comment?
 #  That’s not correct. The  authorizedKeys.keys  attribute is a list of strings. 
 #  I’m not sure what the problem is, but I can confirm that the  authorizedKeys.keys  attribute is a list of strings. 
 #  I’m sorry, I was wrong.
+
 
