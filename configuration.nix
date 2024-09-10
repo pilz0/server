@@ -233,13 +233,13 @@ services.unifi = {
 
 services.unpoller = {
   enable = true;
-unifi = {
-    dynamic = true;
+  influxdb.disable = true;
+unifi = { 
      defaults = {
-        url = "https://localhost:8443";
+        url = "https://unifi.ketamin.trade";
         user = "unpoller";
         pass = "/srv/password";
-        verify_ssl = false;
+        verify_ssl = true;
     }; 
   };
 };
