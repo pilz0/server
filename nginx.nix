@@ -47,6 +47,14 @@
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
+    virtualHosts."https://flohannes.de" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "https://localhost:3235";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
   };
   security.acme = {
     acceptTerms = true;
