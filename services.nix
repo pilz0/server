@@ -24,10 +24,11 @@
   services.tailscale.enable = true;
   programs.git.config.user.name = "pilz0";
   programs.git.config.user.email = "marie0@riseup.net";
-services.sftpgo = {
-  enable = true;
-  dataDir = "/srv/sftpgo";
-}
-
-
+  services.vsftpd = {
+    writeEnable = true;
+    enable = true;
+    localUsers = true;
+    userlistEnable = true;
+    userlistFile = "/home/marie/.ftpuser";
+  };
 }
