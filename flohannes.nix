@@ -43,7 +43,6 @@ services.wordpress.sites."flohannes.de" = {
       wordpress-seo;
       jetpack;
   };
-  };
 settings = {
     WP_DEFAULT_THEME = "responsive";
     FORCE_SSL_ADMIN = true;
@@ -54,5 +53,4 @@ settings = {
   '';
   virtualHosts.listen."flohannes.de".port = 3235;
 };
-
 }
