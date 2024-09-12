@@ -28,7 +28,5 @@
     writeEnable = true;
     enable = true;
     localUsers = true;
-    userlistEnable = true;
-    userlistFile = "/home/marie/.ftpuser";
   };
 }
