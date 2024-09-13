@@ -9,8 +9,6 @@ let
     };
   };
 
-  # external plugin packages not available in nipxkgs
-  plugins = {
   languages = [
     (pkgs.stdenv.mkDerivation rec {
       pname = "wordpress-language-de_DE";
@@ -60,7 +58,8 @@ in {
       }
     ];
   };
-
+}
+{
   services.phpfpm.pools = lib.attrsets.mapAttrs' (site: cfg: (
     lib.attrsets.nameValuePair "wordpress-${site}" {
       phpPackage = pkgs.php.withExtensions ({ enabled, all }: enabled ++ [ all.imagick ]);
@@ -116,3 +115,4 @@ in {
     ];
     ensureDatabases = [ "listmonk" ];
   };
+}
