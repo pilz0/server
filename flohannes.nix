@@ -2,7 +2,7 @@
 
 let
   wordpressPackage = pkgs.unstable.wordpress;  # use unstable to stay closer to upstream
-
+  sites = {
     "flohannes.de" = {
       shortName = "flohannes";
       port = 61020;
@@ -88,7 +88,7 @@ in {
       '';
     }
   )) sites;
-  
+
   services.listmonk = {
     enable = true;
     settings = {
