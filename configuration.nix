@@ -16,7 +16,8 @@
     ./nginx.nix
     ./foo.nix
     ./zsh.nix
-    ./flohannes.nix
+#    ./flohannes.nix
+    ./restic.nix
   ];
   #All my Programms :3
   environment.systemPackages = with pkgs; [
