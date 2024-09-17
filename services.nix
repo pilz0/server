@@ -24,9 +24,14 @@
   services.tailscale.enable = true;
   programs.git.config.user.name = "pilz0";
   programs.git.config.user.email = "marie0@riseup.net";
-  services.vsftpd = {
-    writeEnable = true;
-    enable = true;
-    localUsers = true;
-  };
+#  services.vsftpd = {
+ #   writeEnable = true;
+  #  enable = true;
+#    localUsers = true;
+ # services.qbittorrent = {
+ #   enable = true;
+ #   openFirewall = true;
+  #  port = 58080;
+   # };
+ # };
 }
