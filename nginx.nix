@@ -47,6 +47,14 @@
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
+    virtualHosts."torrent.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://10.10.1.9:8090";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
   };
 
   security.acme = {
