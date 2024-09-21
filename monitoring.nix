@@ -28,10 +28,10 @@
               "vps2.ketamin.trade:9100"
               "shit.ketamin.trade:9100"
               "localhost:9100"
-	      "localhost:9753"
-	      "localhost:9633"
-	      "vps3.ketamin.trade:9100"
-	      "10.10.1.9:17871"
+              "localhost:9753"
+              "localhost:9633"
+              "vps3.ketamin.trade:9100"
+              "10.10.1.9:17871"
             ];
 
           }
@@ -55,18 +55,21 @@
         enable = true;
         enabledCollectors = [ "systemd" ];
         port = 9100;
-	};
+      };
       restic = {
-	refreshInterval = 1800;
-	user = "prometheus";
-	enable = true;
-	repository = "rclone:smb:/Buro/backup";
-	passwordFile = "/home/marie/restic/password";
-	rcloneConfigFile ="/srv/pass";
-	};
+        refreshInterval = 1800;
+        user = "prometheus";
+        enable = true;
+        repository = "rclone:smb:/Buro/backup";
+        passwordFile = "/home/marie/restic/password";
+        rcloneConfigFile = "/srv/pass";
+      };
       smartctl = {
-	enable = true;
-	devices = [ "/dev/sda" "/dev/sdb" ];
+        enable = true;
+        devices = [
+          "/dev/sda"
+          "/dev/sdb"
+        ];
       };
     };
   };

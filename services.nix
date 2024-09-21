@@ -24,15 +24,4 @@
   services.tailscale.enable = true;
   programs.git.config.user.name = "pilz0";
   programs.git.config.user.email = "marie0@riseup.net";
-environment.etc."nextcloud-admin-pass".text = "PWD";
-#  services.vsftpd = {
- #   writeEnable = true;
-  #  enable = true;
-#    localUsers = true;
- # services.qbittorrent = {
- #   enable = true;
- #   openFirewall = true;
-  #  port = 58080;
-   # };
- # };
 }
