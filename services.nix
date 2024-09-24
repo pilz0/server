@@ -24,4 +24,20 @@
   services.tailscale.enable = true;
   programs.git.config.user.name = "pilz0";
   programs.git.config.user.email = "marie0@riseup.net";
+
+  services.writefreely = {
+    enable = true;
+    admin.name = "admin";
+    host = "flohannes.de";
+    database = {
+      type = "sqlite3";
+    };
+    nginx = {
+      enable = true;
+      forceSSL = true;
+    };
+    acme = {
+      enable = true;
+    };
+  };
 }
