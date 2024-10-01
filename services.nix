@@ -28,9 +28,7 @@ hardware.nvidia = {
     open = false;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
     nvidiaPersistenced = true;
-    prime.offload.enable = true;
-  };
-
+ };
   virtualisation.docker.enable = true;
   virtualisation.containerd.enable = true;
   services.tailscale.enable = true;

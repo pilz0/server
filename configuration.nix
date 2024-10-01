@@ -23,7 +23,6 @@
   #All my Programms :3
   environment.systemPackages = with pkgs; [
     htop
-    nvidia-offload
     tmux
     busybox
     prometheus
