@@ -23,6 +23,7 @@
   #All my Programms :3
   environment.systemPackages = with pkgs; [
     htop
+    nvidia-offload
     tmux
     busybox
     prometheus
@@ -65,6 +66,21 @@
     spotifyd
     unifi8
     pipes
+    nvidia-docker
+    htop
+    nvtopPackages.nvidia
+    procps
+    gnumake
+    util-linux
+    m4
+    cudatoolkit
+    linuxPackages.nvidia_x11
+    libGLU libGL
+    xorg.libXi xorg.libXmu freeglut
+    xorg.libXext xorg.libX11 xorg.libXv xorg.libXrandr zlib 
+    ncurses5
+    stdenv.cc
+    binutils
     curl
     ddclient
     docker-compose

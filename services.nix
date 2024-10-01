@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   services.jellyfin = {
     enable = true;
@@ -19,6 +19,18 @@
       intel-media-sdk # QSV up to 11th gen
     ];
   };
+services.xserver.videoDrivers = ["nvidia"];
+hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    nvidiaSettings = true;
+    powerManagement.finegrained = false;
+    open = false;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    nvidiaPersistenced = true;
+    prime.offload.enable = true;
+  };
+
   virtualisation.docker.enable = true;
   virtualisation.containerd.enable = true;
   services.tailscale.enable = true;
@@ -27,7 +39,7 @@
 
   services.writefreely = {
     enable = true;
-    admin.name = "admin";
+    admin.name = "marie";
     host = "flohannes.de";
     database = {
       type = "sqlite3";

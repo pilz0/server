@@ -27,7 +27,7 @@
       enableACME = true;
       forceSSL = true;
       locations."/" = {
-        proxyPass = "http://10.10.1.9:1100";
+        proxyPass = "http://10.10.1.22:1100";
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
@@ -51,7 +51,7 @@
       enableACME = true;
       forceSSL = true;
       locations."/" = {
-        proxyPass = "http://10.10.1.9:8090";
+        proxyPass = "http://10.10.1.22:8090";
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
