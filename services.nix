@@ -1,5 +1,5 @@
 { pkgs, config, ... }:
-{
+	{
   services.jellyfin = {
     enable = true;
     openFirewall = true;
@@ -9,6 +9,7 @@
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
+  boot.initrd.availableKernelModules = [];
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
@@ -19,6 +20,7 @@
       intel-media-sdk # QSV up to 11th gen
     ];
   };
+services.xserver.enable = true;
 services.xserver.videoDrivers = ["nvidia"];
 hardware.nvidia = {
     modesetting.enable = true;
