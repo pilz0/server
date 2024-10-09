@@ -29,7 +29,7 @@ hardware.nvidia = {
     powerManagement.finegrained = false;
     open = false;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
-    nvidiaPersistenced = true;
+#    nvidiaPersistenced = true;
  };
   virtualisation.docker.enable = true;
   virtualisation.containerd.enable = true;

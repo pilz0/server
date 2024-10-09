@@ -55,6 +55,13 @@
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
+    virtualHosts."ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        return = "302 https://blog.ketamin.trade";
+      };
+    };
   };
 
   security.acme = {
