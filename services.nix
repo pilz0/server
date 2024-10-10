@@ -9,7 +9,8 @@
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
-  boot.initrd.availableKernelModules = [];
+boot.initrd.kernelModules = [ "nvidia" ];
+boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
