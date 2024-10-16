@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, config, ... }:
 {
   services.nginx = {
     enable = true;
@@ -61,6 +61,10 @@
       locations."/" = {
         return = "302 https://blog.ketamin.trade";
       };
+    };
+    virtualHosts.${config.services.nextcloud.hostName} = {
+      forceSSL = true;
+      enableACME = true;
     };
   };
 

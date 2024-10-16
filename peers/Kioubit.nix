@@ -3,10 +3,13 @@
   networking.wireguard.interfaces.dn42-peer1 = {
     privateKeyFile = "/home/marie/wg/privatekey";
     allowedIPsAsRoutes = false;
-    listenPort = 20663;
+    listenPort = 51820;
+    ips = [ "192.168.217.70/32" ];
 
     peers = [
       {
+	          persistentKeepalive = 25;
+
         publicKey = "B1xSG/XTJRLd+GrWDsB06BqnIq8Xud93YVh/LYYYtUY=";
         allowedIPs = [
           "0.0.0.0/0"

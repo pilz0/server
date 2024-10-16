@@ -53,4 +53,17 @@ hardware.nvidia = {
       enable = true;
     };
   };
+environment.etc."nextcloud-admin-pass".text = "lDtdt4sZx5LBnYbdUSM"; ## just a default pw
+services.nextcloud = {
+  enable = true;
+  configureRedis = true;
+  maxUploadSize = "20G";
+  https = true;
+  package = pkgs.nextcloud29;
+  hostName = "cloud.ketamin.trade";
+  config.adminpassFile = "/etc/nextcloud-admin-pass";
+  appstoreEnable = true;
+  extraAppsEnable = true;
+};
+
 }
