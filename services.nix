@@ -38,8 +38,19 @@ hardware.nvidia = {
   programs.git.config.user.name = "pilz0";
   programs.git.config.user.email = "marie0@riseup.net";
 
+services.ollama = {
+  enable = true;
+  acceleration = "cuda";
+};
+services.open-webui = {
+enable = true;
+port = 2315;
+};
+
+
+
   services.writefreely = {
-    enable = true;
+#    enable = true;
     admin.name = "marie";
     host = "flohannes.de";
     database = {
@@ -59,7 +70,7 @@ services.nextcloud = {
   configureRedis = true;
   maxUploadSize = "20G";
   https = true;
-  package = pkgs.nextcloud29;
+  package = pkgs.nextcloud30;
   hostName = "cloud.ketamin.trade";
   config.adminpassFile = "/etc/nextcloud-admin-pass";
   appstoreEnable = true;

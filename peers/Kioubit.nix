@@ -19,8 +19,8 @@
       }
     ];
     postSetup = ''
-      ${pkgs.iproute}/bin/ip addr add 192.168.217.70/32 peer 172.20.53.97/32 dev dn42-peer
-      ${pkgs.iproute}/bin/ip -6 addr add fe80::ade0/128 dev dn42-peer
+      ${pkgs.iproute2}/bin/ip addr add 192.168.217.70/32 peer 172.20.53.97/32 dev dn42-peer
+      ${pkgs.iproute2}/bin/ip -6 addr add fe80::ade0/128 dev dn42-peer
     '';
   };
 }

@@ -16,9 +16,9 @@
     ./nginx.nix
     ./foo.nix
     ./zsh.nix
-    ./dn42.nix
-    ./wg.nix
-    ./birb.nix
+#    ./dn42.nix
+#    ./wg.nix
+#    ./birb.nix
     ./restic.nix
     #    ./qbittorrent.nix
   ];
@@ -72,7 +72,6 @@
     nvtopPackages.nvidia
     procps
     gnumake
-    util-linux
     m4
     cudatoolkit
     linuxPackages.nvidia_x11
