@@ -1,10 +1,12 @@
 { pkgs, ... }:
 {
-  services.unifi = {
-    enable = true;
-    openFirewall = true;
-    unifiPackage = pkgs.unifi8;
-  };
+  #  services.unifi = {
+  #    enable = true;
+  #    openFirewall = true;
+  #    unifiPackage = pkgs.unifi8;
+  #  };
+
+  services.unifi.mongodbPackage = pkgs.mongodb-6_0;
   networking.networkmanager.enable = true;
   networking.hostName = "serva";
   services.unpoller = {
@@ -35,6 +37,7 @@
       9090
       9100
       1312
+      8090
     ];
     allowedUDPPorts = [
       1100
@@ -51,6 +54,7 @@
       9090
       9100
       1312
+      17871
     ];
   };
 

@@ -16,7 +16,11 @@
     ./nginx.nix
     ./foo.nix
     ./zsh.nix
-    ./flohannes.nix
+    #    ./dn42.nix
+    #    ./wg.nix
+    #    ./birb.nix
+    ./restic.nix
+    #    ./qbittorrent.nix
   ];
   #All my Programms :3
   environment.systemPackages = with pkgs; [
@@ -63,6 +67,27 @@
     spotifyd
     unifi8
     pipes
+    nvidia-docker
+    htop
+    nvtopPackages.nvidia
+    procps
+    gnumake
+    m4
+    cudatoolkit
+    linuxPackages.nvidia_x11
+    libGLU
+    libGL
+    xorg.libXi
+    xorg.libXmu
+    freeglut
+    xorg.libXext
+    xorg.libX11
+    xorg.libXv
+    xorg.libXrandr
+    zlib
+    ncurses5
+    stdenv.cc
+    binutils
     curl
     ddclient
     docker-compose
