@@ -91,25 +91,30 @@
      enable = true;
      port = 51231;
      apiKeyFile = "/home/marie/secrets/prowlarr";
+     url = {$services.nginx.virtualHosts."prowlarr.ketamin.trade".locations."/".proxyPass};
      };
      exportarr-lidarr = {
      enable = true;
      port = 56231;
      apiKeyFile = "/home/marie/secrets/lidarr";
+     url = {$services.nginx.virtualHosts."lidarr.ketamin.trade".locations."/".proxyPass};
      };
      exportarr-sonarr = {
      enable = true;
      port = 51211;
      apiKeyFile = "/home/marie/secrets/sonarr";
+     url = {$services.nginx.virtualHosts."sonarr.ketamin.trade".locations."/".proxyPass};
      };
      exportarr-radarr = {
      enable = true;
      port = 51711;
+     url = {$services.nginx.virtualHosts."radarr.ketamin.trade".locations."/".proxyPass};
      apiKeyFile = "/home/marie/secrets/radarr";
      };
      exportarr-bazarr = {
      enable = true;
      port = 51235;
+     url = {$services.nginx.virtualHosts."bazarr.ketamin.trade".locations."/".proxyPass};
      apiKeyFile = "/home/marie/secrets/bazarr";
      };
     };
