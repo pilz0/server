@@ -43,10 +43,11 @@
               "vps12.ketamin.trade:9100"
               "10.10.1.22:17871"
               "localhost:9708"
-              "localhost:${config.services.prometheus.exporters.exportarr-sonarr.port}"
-              "localhost:${config.services.prometheus.exporters.exportarr-radarr.port}"
-              "localhost:${config.services.prometheus.exporters.exportarr-prowlarr.port}"
-              "localhost:${config.services.prometheus.exporters.exportarr-bazarr.port}"
+              "localhost:56231"
+              "localhost:51711"
+              "localhost:51235"
+              "localhost:51211"
+              "localhost:51231"
             ];
 
           }
@@ -100,6 +101,11 @@
      enable = true;
      port = 51211;
      apiKeyFile = "/home/marie/secrets/sonarr";
+     };
+     exportarr-radarr = {
+     enable = true;
+     port = 51711;
+     apiKeyFile = "/home/marie/secrets/radarr";
      };
      exportarr-bazarr = {
      enable = true;
