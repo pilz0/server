@@ -22,10 +22,10 @@ in
     before = [ "bird.service" ];
   };
 
-#  services.bird2 = {
-#    enable = true;
-#    config = (builtins.readFile "/home/marie/server/bird.conf");
-#  };
+  #  services.bird2 = {
+  #    enable = true;
+  #    config = (builtins.readFile "/home/marie/server/bird.conf");
+  #  };
 
   systemd.services = {
     dn42-roa = {

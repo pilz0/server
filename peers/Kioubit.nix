@@ -8,7 +8,7 @@
 
     peers = [
       {
-	          persistentKeepalive = 25;
+        persistentKeepalive = 25;
 
         publicKey = "B1xSG/XTJRLd+GrWDsB06BqnIq8Xud93YVh/LYYYtUY=";
         allowedIPs = [

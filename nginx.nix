@@ -35,7 +35,47 @@
       enableACME = true;
       forceSSL = true;
       locations."/" = {
-        proxyPass = "https://localhost:8443";
+        proxyPass = "http://localhost:8443";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."radarr.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://localhost:7878";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."bazarr.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://localhost:6767";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."sonarr.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://localhost:8989";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."prowlarr.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://localhost:9696";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."lidarr.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://localhost:8686";
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
@@ -43,7 +83,7 @@
       enableACME = true;
       forceSSL = true;
       locations."/" = {
-        proxyPass = "https://localhost:61015";
+        proxyPass = "http://localhost:61015";
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
@@ -60,6 +100,14 @@
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://localhost:2315";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."jellyfin.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://localhost:8096";
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };

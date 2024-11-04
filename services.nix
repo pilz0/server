@@ -1,5 +1,5 @@
 { pkgs, config, ... }:
-	{
+{
   services.jellyfin = {
     enable = true;
     openFirewall = true;
@@ -9,8 +9,27 @@
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
-boot.initrd.kernelModules = [ "nvidia" ];
-boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
+  services.radarr = {
+    enable = true;
+  };
+  services.bazarr = {
+    enable = true;
+  };
+  services.sonarr = {
+    enable = true;
+  };
+  services.lidarr = {
+    enable = true;
+  };
+  services.prowlarr = {
+    enable = true;
+  };
+#  services.flaresolverr = {
+#     enable = true;
+#  };
+
+  boot.initrd.kernelModules = [ "nvidia" ];
+#  boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
@@ -21,36 +40,37 @@ boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
       intel-media-sdk # QSV up to 11th gen
     ];
   };
-services.xserver.enable = true;
-services.xserver.videoDrivers = ["nvidia"];
-hardware.nvidia = {
+
+ # services.xserver.enable = true;
+  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.enable = true;
+
+  hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;
     nvidiaSettings = true;
     powerManagement.finegrained = false;
     open = false;
     package = config.boot.kernelPackages.nvidiaPackages.beta;
-#    nvidiaPersistenced = true;
- };
+  };
+
   virtualisation.docker.enable = true;
   virtualisation.containerd.enable = true;
   services.tailscale.enable = true;
   programs.git.config.user.name = "pilz0";
   programs.git.config.user.email = "marie0@riseup.net";
 
-services.ollama = {
-  enable = true;
-  acceleration = "cuda";
-};
-services.open-webui = {
-enable = true;
-port = 2315;
-};
-
-
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+  };
+#  services.open-webui = {
+#  enable = true;
+#  port = 2315;
+#  };
 
   services.writefreely = {
-#    enable = true;
+    #    enable = true;
     admin.name = "marie";
     host = "flohannes.de";
     database = {
@@ -64,17 +84,18 @@ port = 2315;
       enable = true;
     };
   };
-environment.etc."nextcloud-admin-pass".text = "lDtdt4sZx5LBnYbdUSM"; ## just a default pw
-services.nextcloud = {
-  enable = true;
-  configureRedis = true;
-  maxUploadSize = "20G";
-  https = true;
-  package = pkgs.nextcloud30;
-  hostName = "cloud.ketamin.trade";
-  config.adminpassFile = "/etc/nextcloud-admin-pass";
-  appstoreEnable = true;
-  extraAppsEnable = true;
-};
 
+  environment.etc."nextcloud-admin-pass".text = "lDtdt4sZx5LBnYbdUSM"; # # just a default pw
+  services.nextcloud = {
+    enable = true;
+    configureRedis = true;
+    maxUploadSize = "20G";
+    https = true;
+    package = pkgs.nextcloud30;
+    hostName = "cloud.ketamin.trade";
+    config.adminpassFile = "/etc/nextcloud-admin-pass";
+#    datadir = "/";
+    appstoreEnable = true;
+    extraAppsEnable = true;
+  };
 }
