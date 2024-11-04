@@ -42,6 +42,11 @@
               "vps11.ketamin.trade:9100"
               "vps12.ketamin.trade:9100"
               "10.10.1.22:17871"
+              "localhost:9708"
+              "localhost:${config.services.prometheus.exporters.exportarr-sonarr.port}"
+              "localhost:${config.services.prometheus.exporters.exportarr-radarr.port}"
+              "localhost:${config.services.prometheus.exporters.exportarr-prowlarr.port}"
+              "localhost:${config.services.prometheus.exporters.exportarr-bazarr.port}"
             ];
 
           }
@@ -71,7 +76,7 @@
         user = "prometheus";
         enable = true;
         repository = "rclone:smb:/Buro/backup";
-        passwordFile = "/home/marie/restic/password";
+        passwordFile = "/home/marie/restic";
         rcloneConfigFile = "/srv/pass";
       };
       smartctl = {
@@ -81,6 +86,26 @@
           "/dev/sdb"
         ];
       };
+     exportarr-prowlarr = {
+     enable = true;
+     port = 51231;
+     apiKeyFile = "/home/marie/secrets/prowlarr";
+     };
+     exportarr-lidarr = {
+     enable = true;
+     port = 56231;
+     apiKeyFile = "/home/marie/secrets/lidarr";
+     };
+     exportarr-sonarr = {
+     enable = true;
+     port = 51211;
+     apiKeyFile = "/home/marie/secrets/sonarr";
+     };
+     exportarr-bazarr = {
+     enable = true;
+     port = 51235;
+     apiKeyFile = "/home/marie/secrets/bazarr";
+     };
     };
   };
 }
