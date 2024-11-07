@@ -77,7 +77,7 @@
         user = "prometheus";
         enable = true;
         repository = "rclone:smb:/Buro/backup";
-        passwordFile = "/home/marie/restic";
+        passwordFile = "/var/lib/secrets/restic";
         rcloneConfigFile = "/srv/pass";
       };
       smartctl = {

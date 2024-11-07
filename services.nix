@@ -64,10 +64,10 @@
     enable = true;
     acceleration = "cuda";
   };
-#  services.open-webui = {
-#  enable = true;
-#  port = 2315;
-#  };
+  services.open-webui = {
+  enable = true;
+  port = 2315;
+  };
 
   services.writefreely = {
     #    enable = true;
