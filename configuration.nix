@@ -20,9 +20,8 @@
     #    ./wg.nix
     #    ./birb.nix
     ./restic.nix
-    #    ./qbittorrent.nix
   ];
-  #All my Programms :3
+
   environment.systemPackages = with pkgs; [
     htop
     tmux

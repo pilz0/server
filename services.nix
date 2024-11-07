@@ -24,12 +24,9 @@
   services.prowlarr = {
     enable = true;
   };
-#  services.flaresolverr = {
-#     enable = true;
-#  };
 
   boot.initrd.kernelModules = [ "nvidia" ];
-#  boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
+  #  boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
@@ -41,8 +38,8 @@
     ];
   };
 
- # services.xserver.enable = true;
-  services.xserver.videoDrivers = ["nvidia"];
+  # services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
   services.xserver.enable = true;
 
   hardware.nvidia = {
@@ -65,8 +62,8 @@
     acceleration = "cuda";
   };
   services.open-webui = {
-  enable = true;
-  port = 2315;
+    enable = true;
+    port = 2315;
   };
 
   services.writefreely = {
@@ -85,17 +82,64 @@
     };
   };
 
-  environment.etc."nextcloud-admin-pass".text = "lDtdt4sZx5LBnYbdUSM"; # # just a default pw
+  environment.etc."nextcloud-admin-pass".text = "lDtdt4sZx5LBnYbdUSM"; # just a default pw
   services.nextcloud = {
     enable = true;
-    configureRedis = true;
     maxUploadSize = "20G";
-    https = true;
-    package = pkgs.nextcloud30;
-    hostName = "cloud.ketamin.trade";
-    config.adminpassFile = "/etc/nextcloud-admin-pass";
-#    datadir = "/";
     appstoreEnable = true;
     extraAppsEnable = true;
+    package = pkgs.nextcloud30;
+    hostName = "cloud.ketamin.trade";
+    # home = "";
+    caching = {
+      apcu = false;
+      redis = true;
+    };
+    config = {
+      adminpassFile = "/etc/nextcloud-admin-pass";
+      dbhost = "/run/postgresql";
+      dbtype = "pgsql";
+      dbuser = "nextcloud";
+    };
+    settings = {
+      default_phone_region = "DE";
+      trusted_proxies = [
+        "127.0.0.1"
+        "::1"
+      ];
+    };
+    poolSettings = {
+      "pm" = "dynamic";
+      "pm.max_children" = "120";
+      "pm.max_requests" = "500";
+      "pm.max_spare_servers" = "18";
+      "pm.min_spare_servers" = "6";
+      "pm.start_servers" = "12";
+    };
+    https = true;
   };
+  services.redis.servers.nextcloud = {
+    enable = true;
+    bind = "::1";
+    port = 6379;
+  };
+
+  services.postgresql = {
+    ensureDatabases = [ config.services.nextcloud.config.dbname ];
+    ensureUsers = [
+      {
+        name = config.services.nextcloud.config.dbuser;
+        ensureDBOwnership = true;
+      }
+    ];
+  };
+  services.postgresqlBackup.databases = [ config.services.nextcloud.config.dbname ];
+  systemd.services.nextcloud-setup.serviceConfig.ExecStartPost = pkgs.writeScript "nextcloud-redis.sh" ''
+    #!${pkgs.runtimeShell}
+    nextcloud-occ config:system:set redis 'host' --value '::1' --type string
+    nextcloud-occ config:system:set redis 'port' --value 6379 --type integer
+    nextcloud-occ config:system:set memcache.local --value '\OC\Memcache\Redis' --type string
+    nextcloud-occ config:system:set memcache.locking --value '\OC\Memcache\Redis' --type string
+  '';
+
 }
