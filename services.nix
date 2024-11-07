@@ -38,7 +38,6 @@
     ];
   };
 
-  # services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   services.xserver.enable = true;
 
@@ -89,6 +88,7 @@
     appstoreEnable = true;
     extraAppsEnable = true;
     package = pkgs.nextcloud30;
+    configureRedis = true;
     hostName = "cloud.ketamin.trade";
     # home = "";
     caching = {
@@ -118,11 +118,6 @@
     };
     https = true;
   };
-  services.redis.servers.nextcloud = {
-    enable = true;
-    bind = "::1";
-    port = 6379;
-  };
 
   services.postgresql = {
     ensureDatabases = [ config.services.nextcloud.config.dbname ];
@@ -134,12 +129,4 @@
     ];
   };
   services.postgresqlBackup.databases = [ config.services.nextcloud.config.dbname ];
-  systemd.services.nextcloud-setup.serviceConfig.ExecStartPost = pkgs.writeScript "nextcloud-redis.sh" ''
-    #!${pkgs.runtimeShell}
-    nextcloud-occ config:system:set redis 'host' --value '::1' --type string
-    nextcloud-occ config:system:set redis 'port' --value 6379 --type integer
-    nextcloud-occ config:system:set memcache.local --value '\OC\Memcache\Redis' --type string
-    nextcloud-occ config:system:set memcache.locking --value '\OC\Memcache\Redis' --type string
-  '';
-
 }
