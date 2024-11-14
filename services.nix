@@ -24,7 +24,9 @@
   services.prowlarr = {
     enable = true;
   };
-
+  services.jellyseerr = {
+    enable = true;
+  };
   boot.initrd.kernelModules = [ "nvidia" ];
   #  boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
   hardware.graphics = {
@@ -81,52 +83,4 @@
     };
   };
 
-  environment.etc."nextcloud-admin-pass".text = "lDtdt4sZx5LBnYbdUSM"; # just a default pw
-  services.nextcloud = {
-    enable = true;
-    maxUploadSize = "20G";
-    appstoreEnable = true;
-    extraAppsEnable = true;
-    package = pkgs.nextcloud30;
-    configureRedis = true;
-    hostName = "cloud.ketamin.trade";
-    # home = "";
-    caching = {
-      apcu = false;
-      redis = true;
-    };
-    config = {
-      adminpassFile = "/etc/nextcloud-admin-pass";
-      dbhost = "/run/postgresql";
-      dbtype = "pgsql";
-      dbuser = "nextcloud";
-    };
-    settings = {
-      default_phone_region = "DE";
-      trusted_proxies = [
-        "127.0.0.1"
-        "::1"
-      ];
-    };
-    poolSettings = {
-      "pm" = "dynamic";
-      "pm.max_children" = "120";
-      "pm.max_requests" = "500";
-      "pm.max_spare_servers" = "18";
-      "pm.min_spare_servers" = "6";
-      "pm.start_servers" = "12";
-    };
-    https = true;
-  };
-
-  services.postgresql = {
-    ensureDatabases = [ config.services.nextcloud.config.dbname ];
-    ensureUsers = [
-      {
-        name = config.services.nextcloud.config.dbuser;
-        ensureDBOwnership = true;
-      }
-    ];
-  };
-  services.postgresqlBackup.databases = [ config.services.nextcloud.config.dbname ];
 }

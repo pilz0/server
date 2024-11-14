@@ -79,6 +79,14 @@
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
+    virtualHosts."jellyseerr.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://localhost:5055";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
     virtualHosts."lists.ketamin.trade" = {
       enableACME = true;
       forceSSL = true;

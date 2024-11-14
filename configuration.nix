@@ -16,6 +16,7 @@
     ./nginx.nix
     ./foo.nix
     ./zsh.nix
+    ./nextcloud.nix
     #    ./dn42.nix
     #    ./wg.nix
     #    ./birb.nix
