@@ -10,9 +10,24 @@
     owner = "prometheus";
     group = "prometheus";
   };
+  age.secrets.smtp = {
+    file = ./secrets/smtp.age;
+    owner = "grafana";
+    group = "grafana";
+  };
+
   services.grafana = {
     enable = true;
     settings = {
+      smtp = {
+        enable = true;
+        user = "t3st1ng1312@cock.li";
+        startTLS_policy = "MandatoryStartTLS";
+        key_file = "config.age.secrets.smtp.key";
+        host = "mail.cock.li:465";
+        from_name = config.services.grafana.settings.server.domain;
+        from_address = config.services.grafana.settings.smtp.user;
+      };
       server = {
         domain = "grafana.ketamin.trade";
         http_port = 3001;
