@@ -1,1 +1,1 @@
-Config for my Server which runs my nextcloud and maybe other stuff :3
+Config for my Server which runs software

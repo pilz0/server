@@ -18,7 +18,8 @@
       this system you indicate your awareness of and consent to these terms and
       conditions of use. LOG OFF IMMEDIATELY if you do not agree to the conditions
       stated in this warning.
-      *****************************************************************************";
+      *****************************************************************************
+      ";
 
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = false;

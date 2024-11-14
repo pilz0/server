@@ -1,16 +1,15 @@
 { config, ... }:
 {
-age.secrets.rclone = {
-  file = ./secrets/rclone.age;
-  owner = "prometheus";
-  group = "prometheus";
-};
-age.secrets.restic = {
-  file = ./secrets/restic.age;
-  owner = "prometheus";
-  group = "prometheus";
-};
-
+  age.secrets.rclone = {
+    file = ./secrets/rclone.age;
+    owner = "prometheus";
+    group = "prometheus";
+  };
+  age.secrets.restic = {
+    file = ./secrets/restic.age;
+    owner = "prometheus";
+    group = "prometheus";
+  };
   services.grafana = {
     enable = true;
     settings = {
@@ -46,8 +45,8 @@ age.secrets.restic = {
               "localhost:51235"
               "localhost:51211"
               "localhost:51231"
-	      "tor1.ketamin.trade:9100"
-	      "tor2.ketamin.trade:9100"
+              "tor1.ketamin.trade:9100"
+              "tor2.ketamin.trade:9100"
             ];
 
           }
@@ -73,7 +72,7 @@ age.secrets.restic = {
         port = 9100;
       };
       restic = {
-        refreshInterval = 1800;
+        refreshInterval = 6000;
         user = "prometheus";
         enable = true;
         repository = "rclone:smb:/Buro/backup";
@@ -87,45 +86,45 @@ age.secrets.restic = {
           "/dev/sdb"
         ];
       };
-#      exportarr-prowlarr = {
-#        enable = true;
-#        port = 51231;
-#        apiKeyFile = "/var/lib/secrets/prowlarr";
-#        user = "prometheus";
-#        url = config.services.nginx.virtualHosts."prowlarr.ketamin.trade".locations."/".proxyPass;
-#        extraFlags = [ "-c /var/lib/prowlarr/config.xml" ];
-#      };
-#      exportarr-lidarr = {
-#        enable = true;
-#        port = 56231;
-#        apiKeyFile = "/var/lib/secrets/lidarr";
-#        user = "prometheus";
-#        url = config.services.nginx.virtualHosts."lidarr.ketamin.trade".locations."/".proxyPass;
-#        extraFlags = [ "--api-key-file /var/lib/secrets/lidarr" ];
-#      };
-#      exportarr-sonarr = {
-#        enable = true;
-#        port = 51211;
-#        apiKeyFile = "/var/lib/secrets/sonarr";
-#        user = "prometheus";
-#        url = config.services.nginx.virtualHosts."sonarr.ketamin.trade".locations."/".proxyPass;
-#        extraFlags = [ "--api-key-file /var/lib/secrets/sonarr" ];
-#      };
-#      exportarr-radarr = {
-#        enable = true;
-#        port = 51711;
-#        user = "prometheus";
-#        url = config.services.nginx.virtualHosts."radarr.ketamin.trade".locations."/".proxyPass;
-#        extraFlags = [ (builtins.readFile /var/lib/secrets/bazarr) ];
-#      };
-#      exportarr-bazarr = {
-#        enable = true;
-#        port = 51235;
-#        user = "prometheus";
-#        url = config.services.nginx.virtualHosts."bazarr.ketamin.trade".locations."/".proxyPass;
-#        apiKeyFile = "/var/lib/secrets/bazarr";
-#	extraFlags = [ (builtins.readFile /var/lib/secrets/bazarr) ];
-#      };
+      #      exportarr-prowlarr = {
+      #        enable = true;
+      #        port = 51231;
+      #        apiKeyFile = "/var/lib/secrets/prowlarr";
+      #        user = "prometheus";
+      #        url = config.services.nginx.virtualHosts."prowlarr.ketamin.trade".locations."/".proxyPass;
+      #        extraFlags = [ "-c /var/lib/prowlarr/config.xml" ];
+      #      };
+      #      exportarr-lidarr = {
+      #        enable = true;
+      #        port = 56231;
+      #        apiKeyFile = "/var/lib/secrets/lidarr";
+      #        user = "prometheus";
+      #        url = config.services.nginx.virtualHosts."lidarr.ketamin.trade".locations."/".proxyPass;
+      #        extraFlags = [ "--api-key-file /var/lib/secrets/lidarr" ];
+      #      };
+      #      exportarr-sonarr = {
+      #        enable = true;
+      #        port = 51211;
+      #        apiKeyFile = "/var/lib/secrets/sonarr";
+      #        user = "prometheus";
+      #        url = config.services.nginx.virtualHosts."sonarr.ketamin.trade".locations."/".proxyPass;
+      #        extraFlags = [ "--api-key-file /var/lib/secrets/sonarr" ];
+      #      };
+      #      exportarr-radarr = {
+      #        enable = true;
+      #        port = 51711;
+      #        user = "prometheus";
+      #        url = config.services.nginx.virtualHosts."radarr.ketamin.trade".locations."/".proxyPass;
+      #        extraFlags = [ (builtins.readFile /var/lib/secrets/bazarr) ];
+      #      };
+      #      exportarr-bazarr = {
+      #        enable = true;
+      #        port = 51235;
+      #        user = "prometheus";
+      #        url = config.services.nginx.virtualHosts."bazarr.ketamin.trade".locations."/".proxyPass;
+      #        apiKeyFile = "/var/lib/secrets/bazarr";
+      #	extraFlags = [ (builtins.readFile /var/lib/secrets/bazarr) ];
+      #      };
     };
   };
 }

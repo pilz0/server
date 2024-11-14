@@ -7,7 +7,7 @@
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
     # other Nginx options
-    virtualHosts."grafana.ketamin.trade" = {
+    virtualHosts.${config.services.grafana.settings.server.domain} = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {

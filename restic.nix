@@ -1,11 +1,11 @@
-{ pkgs, ... }:
+{ config, ... }:
 {
   services.restic.backups = {
     smb = {
-      user = "marie";
+      user = "root";
       repository = "rclone:smb:/Buro/backup";
       initialize = true; # initializes the repo, don't set if you want manual control
-      passwordFile = "/home/marie/restic/password";
+      passwordFile = config.age.secrets.restic.path;
       paths = [
         "/home/marie"
         "/srv"
