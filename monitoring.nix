@@ -21,9 +21,10 @@
     settings = {
       smtp = {
         enable = true;
+	enabled = true;
         user = "t3st1ng1312@cock.li";
         startTLS_policy = "MandatoryStartTLS";
-        key_file = "config.age.secrets.smtp.key";
+        password = builtins.readFile config.age.secrets.smtp.path;
         host = "mail.cock.li:465";
         from_name = config.services.grafana.settings.server.domain;
         from_address = config.services.grafana.settings.smtp.user;

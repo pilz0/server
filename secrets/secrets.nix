@@ -14,4 +14,6 @@ in
   "nextcloud.age".publicKeys = [ marieunderdesk serva ];
   "rclone.age".publicKeys = [  marieunderdesk serva ];
   "restic.age".publicKeys = [  marieunderdesk serva ];
+  "smtp.age".publicKeys = [  marieunderdesk serva ];
+
 }
