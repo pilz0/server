@@ -15,5 +15,7 @@ in
   "rclone.age".publicKeys = [  marieunderdesk serva ];
   "restic.age".publicKeys = [  marieunderdesk serva ];
   "smtp.age".publicKeys = [  marieunderdesk serva ];
-
+  "grafana.age".publicKeys = [ marieunderdesk serva ];
+  "writefreely.age".publicKeys = [ marieunderdesk serva ];
+  "nextcloud-exporter.age".publicKeys = [ marieunderdesk serva ];
 }
