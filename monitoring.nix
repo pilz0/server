@@ -30,8 +30,9 @@
         {
           type = "prometheus";
           isDefault = true;
-          name = "Prometheus";
+          name = "prometheus";
           url = "http://localhost:1312";
+          uid = "e68e5107-0b44-4438-870c-019649e85d2b";
         }
       ];
       dashboards = {
