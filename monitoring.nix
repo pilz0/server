@@ -18,10 +18,42 @@
 
   services.grafana = {
     enable = true;
+    declarativePlugins = [
+      "grafana-github-datasource"
+      "grafana-clock-panel"
+      "grafana-llm-app"
+      "grafana-lokiexplore-app"
+      "grafana-oncall-app"
+      "grafana-piechart-panel"
+    ];
+    provision = {
+      enable = true;
+      datasources.settings.datasources = [
+        {
+          type = "prometheus";
+          isDefault = true;
+          name = "Prometheus";
+          url = "http://localhost:1312";
+        }
+      ];
+      dashboards = {
+        settings = {
+          providers = [
+            {
+              name = "My Dashboards";
+              options.path = "/etc/grafana-dashboards";
+            }
+          ];
+        };
+      };
+
+    };
+
     settings = {
+      analytics.reporting_enabled = false;
       smtp = {
         enable = true;
-	enabled = true;
+        enabled = true;
         user = "t3st1ng1312@cock.li";
         startTLS_policy = "MandatoryStartTLS";
         password = builtins.readFile config.age.secrets.smtp.path;
@@ -39,6 +71,33 @@
         org_name = "Main Org.";
         org_role = "Viewer";
       };
+    };
+  };
+  environment.etc = {
+    "grafana-dashboards/node-exporter-full_rev30.json" = {
+      source = ./grafana-dashboards/node-exporter.json;
+      group = "grafana";
+      user = "grafana";
+    };
+    "grafana-dashboards/restic.json" = {
+      source = ./grafana-dashboards/restic.json;
+      group = "grafana";
+      user = "grafana";
+    };
+    "grafana-dashboards/tor.json" = {
+      source = ./grafana-dashboards/tor.json;
+      group = "grafana";
+      user = "grafana";
+    };
+    "grafana-dashboards/qbittorrent.json" = {
+      source = ./grafana-dashboards/qbittorrent.json;
+      group = "grafana";
+      user = "grafana";
+    };
+    "grafana-dashboards/smartctl.json" = {
+      source = ./grafana-dashboards/smartctl.json;
+      group = "grafana";
+      user = "grafana";
     };
   };
   services.prometheus = {
