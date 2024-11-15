@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 {
   age.secrets.rclone = {
     file = ./secrets/rclone.age;
@@ -18,13 +18,11 @@
 
   services.grafana = {
     enable = true;
-    declarativePlugins = [
-      "grafana-github-datasource"
-      "grafana-clock-panel"
-      "grafana-llm-app"
-      "grafana-lokiexplore-app"
-      "grafana-oncall-app"
-      "grafana-piechart-panel"
+    declarativePlugins = with pkgs.grafanaPlugins; [
+      grafana-github-datasource
+      grafana-clock-panel
+      grafana-oncall-app
+      grafana-piechart-panel
     ];
     provision = {
       enable = true;
@@ -74,7 +72,7 @@
     };
   };
   environment.etc = {
-    "grafana-dashboards/node-exporter-full_rev30.json" = {
+    "grafana-dashboards/node-exporter.json" = {
       source = ./grafana-dashboards/node-exporter.json;
       group = "grafana";
       user = "grafana";
