@@ -1,5 +1,10 @@
 { pkgs, config, ... }:
 {
+  age.secrets.writefreely = {
+    file = ./secrets/writefreely.age;
+    owner = "writefreely";
+    group = "writefreely";
+  };
   services.jellyfin = {
     enable = true;
     openFirewall = true;
@@ -33,6 +38,7 @@
   services.ollama = {
     enable = true;
     acceleration = "cuda";
+    loadModels = [ "llama3.2" ];
   };
   services.open-webui = {
     enable = true;
@@ -41,7 +47,11 @@
 
   services.writefreely = {
     #    enable = true;
-    admin.name = "marie";
+    admin = {
+      name = "marie";
+      initialPasswordFile = config.age.secrets.writefreely.path;
+    };
+    settings.app.theme = "Painkiller Bullet";
     host = "flohannes.de";
     database = {
       type = "sqlite3";

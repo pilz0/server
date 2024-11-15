@@ -1,7 +1,13 @@
 { config, ... }:
 {
+  age.secrets.rcloneconfig = {
+    file = ./secrets/rclone.age;
+    owner = "root";
+    group = "root";
+  };
   services.restic.backups = {
     smb = {
+      rcloneConfigFile = config.secrets.rcloneconfig.path;
       user = "root";
       repository = "rclone:smb:/Buro/backup";
       initialize = true; # initializes the repo, don't set if you want manual control

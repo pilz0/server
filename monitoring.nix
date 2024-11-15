@@ -15,7 +15,16 @@
     owner = "grafana";
     group = "grafana";
   };
-
+  age.secrets.grafana = {
+    file = ./secrets/grafana.age;
+    owner = "grafana";
+    group = "grafana";
+  };
+  age.secrets.nextcloud-exporter = {
+    file = ./secrets/nextcloud-exporter.age;
+    owner = "nextcloud-exporter";
+    group = "nextcloud-exporter";
+  };
   services.grafana = {
     enable = true;
     declarativePlugins = with pkgs.grafanaPlugins; [
@@ -70,6 +79,11 @@
         org_name = "Main Org.";
         org_role = "Viewer";
       };
+      security = {
+        admin_password = builtins.readFile config.age.secrets.grafana.path;
+        admin_user = "admin";
+        admin_email = config.programs.git.config.user.email;
+      };
     };
   };
   environment.etc = {
@@ -121,6 +135,8 @@
               "localhost:51231"
               "tor1.ketamin.trade:9100"
               "tor2.ketamin.trade:9100"
+              "tor3.ketamin.trade:9100"
+              "localhost:9205"
             ];
 
           }
@@ -159,6 +175,10 @@
           "/dev/sda"
           "/dev/sdb"
         ];
+      };
+      nextcloud = {
+        passwordFile = config.age.secrets.nextcloud-exporter.path;
+        url = config.services.nextcloud.hostName;
       };
       #      exportarr-prowlarr = {
       #        enable = true;
