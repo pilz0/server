@@ -22,8 +22,8 @@
   };
   age.secrets.nextcloud-exporter = {
     file = ./secrets/nextcloud-exporter.age;
-    owner = "nextcloud-exporter";
-    group = "nextcloud-exporter";
+    owner = "prometheus";
+    group = "prometheus";
   };
   services.grafana = {
     enable = true;
@@ -82,7 +82,7 @@
       security = {
         admin_password = builtins.readFile config.age.secrets.grafana.path;
         admin_user = "admin";
-        admin_email = config.programs.git.config.user.email;
+        admin_email = "marie0@riseup.net";
       };
     };
   };
@@ -178,6 +178,7 @@
       };
       nextcloud = {
         passwordFile = config.age.secrets.nextcloud-exporter.path;
+	user = "prometheus";
         url = config.services.nextcloud.hostName;
       };
       #      exportarr-prowlarr = {

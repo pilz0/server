@@ -32,7 +32,7 @@
     extraAppsEnable = true;
     ensureUsers = {
       pilz = {
-        email = config.programs.git.config.user.email;
+        email = "marie0@riseup.net";
         passwordFile = config.age.secrets.nextcloud.path;
       };
       ${config.services.prometheus.exporters.nextcloud.username} = {

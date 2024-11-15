@@ -7,7 +7,7 @@
   };
   services.restic.backups = {
     smb = {
-      rcloneConfigFile = config.secrets.rcloneconfig.path;
+      rcloneConfigFile = config.age.secrets.rcloneconfig.path;
       user = "root";
       repository = "rclone:smb:/Buro/backup";
       initialize = true; # initializes the repo, don't set if you want manual control

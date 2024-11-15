@@ -51,6 +51,8 @@
       name = "marie";
       initialPasswordFile = config.age.secrets.writefreely.path;
     };
+    group = "writefreely";
+    user = "writefreely";
     settings.app.theme = "Painkiller Bullet";
     host = "flohannes.de";
     database = {
