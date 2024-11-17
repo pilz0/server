@@ -113,6 +113,7 @@
       user = "grafana";
     };
   };
+
   services.prometheus = {
     scrapeConfigs = [
       {
@@ -175,11 +176,6 @@
           "/dev/sda"
           "/dev/sdb"
         ];
-      };
-      nextcloud = {
-        passwordFile = config.age.secrets.nextcloud-exporter.path;
-	user = "prometheus";
-        url = config.services.nextcloud.hostName;
       };
       #      exportarr-prowlarr = {
       #        enable = true;

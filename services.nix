@@ -46,7 +46,7 @@
   };
 
   services.writefreely = {
-    #    enable = true;
+        enable = true;
     admin = {
       name = "marie";
       initialPasswordFile = config.age.secrets.writefreely.path;

@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{  pkgs, ... }:
+{  pkgs, config,  ... }:
 
 {
   imports = [
@@ -95,7 +95,6 @@
     jellyfin
     jellyfin-web
     jellyfin-ffmpeg
-#    inputs.agenix.packages."${system}".default
   ];
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "03:45" ];

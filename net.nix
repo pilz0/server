@@ -9,6 +9,10 @@
   #  services.unifi.mongodbPackage = pkgs.mongodb-7_0;
   networking.networkmanager.enable = true;
   networking.hostName = "serva";
+networking.extraHosts =
+  ''
+    127.0.0.1 cloud.ketamin.trade 
+  '';
   services.unpoller = {
     #   enable = true;
     influxdb.disable = true;
