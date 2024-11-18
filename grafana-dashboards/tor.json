@@ -19,7 +19,20 @@
     "fiscalYearStartMonth": 0,
     "graphTooltip": 0,
     "id": 8,
-    "links": [],
+    "links": [
+        {
+            "asDropdown": false,
+            "icon": "external link",
+            "includeVars": false,
+            "keepTime": false,
+            "tags": [],
+            "targetBlank": true,
+            "title": "metrics.torproject.org",
+            "tooltip": "",
+            "type": "link",
+            "url": "https://metrics.torproject.org/rs.html#search/ketatrade"
+        }
+    ],
     "panels": [
         {
             "datasource": {
@@ -682,6 +695,6 @@
     "timezone": "browser",
     "title": "Tor Relays",
     "uid": "cdyy9ajcti0hsa",
-    "version": 37,
+    "version": 38,
     "weekStart": ""
 }

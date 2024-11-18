@@ -5,11 +5,10 @@
     owner = "writefreely";
     group = "writefreely";
   };
+
   services.jellyfin = {
     enable = true;
-    openFirewall = true;
   };
-
   services.radarr = {
     enable = true;
   };
@@ -46,7 +45,7 @@
   };
 
   services.writefreely = {
-        enable = true;
+    enable = true;
     admin = {
       name = "marie";
       initialPasswordFile = config.age.secrets.writefreely.path;
@@ -66,5 +65,4 @@
       enable = true;
     };
   };
-
 }
