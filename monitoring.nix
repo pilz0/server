@@ -118,12 +118,12 @@
       group = "grafana";
       user = "grafana";
     };
-  "grafana-dashboards/unpoller.json" = {
-    source = ./grafana-dashboards/unpoller.json;
-    group = "grafana";
-    user = "grafana";
+    "grafana-dashboards/unpoller.json" = {
+      source = ./grafana-dashboards/unpoller.json;
+      group = "grafana";
+      user = "grafana";
+    };
   };
-};
   services.prometheus = {
     scrapeConfigs = [
       {
@@ -231,11 +231,11 @@
   services.loki = {
     enable = true;
     configFile = ./loki.yaml;
-    extraFlags = ["-config.expand-env=true"];
-};
+    extraFlags = [ "-config.expand-env=true" ];
+  };
   # promtail: port 3031 (8031)
   services.promtail = {
-    extraFlags = ["-config.expand-env=true"];
+    extraFlags = [ "-config.expand-env=true" ];
     enable = true;
     configuration = {
       server = {

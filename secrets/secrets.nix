@@ -63,4 +63,10 @@ in
     marieunderdesk
     serva
   ];
+  "kioubit.age".publicKeys = [
+    marielap
+    marie
+    marieunderdesk
+    serva
+  ];
 }
