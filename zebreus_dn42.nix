@@ -1,19 +1,12 @@
-# Establishes wireguard tunnels with all nodes with static IPs as hubs.
 { config, lib, ... }:
 
 {
-     age.secrets.wg = {
-      file = ./secrets/kioubit.age;
-      owner = "systemd-network";
-      group = "systemd-network";
-    };
-
     systemd.network = {
       netdevs = {
-        "50-kioubit_de2" = {
+        "zebreus_dn42" = {
           netdevConfig = {
             Kind = "wireguard";
-            Name = "kioubit_de2";
+            Name = "zebreus_dn42";
             MTUBytes = "1420";
           };
           wireguardConfig = {
@@ -21,23 +14,23 @@
           };
           wireguardPeers = [
             {
-              PublicKey = "B1xSG/XTJRLd+GrWDsB06BqnIq8Xud93YVh/LYYYtUY=";
+              PublicKey = "4UTrN0YlflDPRhH9ak5nwrZrL0IrJiZUkEUiSuboRUc=";
               AllowedIPs = [
                 "::/0"
                 "0.0.0.0/0"
               ];
-              Endpoint = "de2.g-load.eu:20663";
+              Endpoint = "192.227.228.220:1";
               PersistentKeepalive = 25;
             }
           ];
         };
       };
-      networks.kioubit_de2 = {
-        matchConfig.Name = "kioubit_de2";
-        address = [ "fe80::ade1/64" ];
+      networks.zebreus_dn42 = {
+        matchConfig.Name = "zebreus_dn42";
+        address = [ "fe80::1312/64" ];
         routes = [
           {
-            Destination = "fe80::ade0/128";
+            Destination = "fe80::acab/128";
             Scope = "link";
           }
         ];
@@ -50,8 +43,9 @@
 
     services.bird2 = {
       config = lib.mkAfter ''
-        protocol bgp kioubit_de2 from dnpeers {
-            neighbor fe80::ade0%kioubit_de2 as 4242423914;
+        protocol bgp antibuilding from dnpeers {
+            neighbor fe80::acab%zebreus_dn42 as 4242420663;
+            direct;
         }
       '';
     };

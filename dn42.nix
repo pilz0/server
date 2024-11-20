@@ -19,6 +19,7 @@ in
 {
   imports = [
     ./kioubit_de2.nix
+    ./zebreus_dn42.nix
   ];
 
   systemd = {
@@ -198,8 +199,12 @@ protocol static {
 template bgp dnpeers {
     local as OWNAS;
     path metric 1;
-
+        enable extended messages on;
+        graceful restart on;
+        long lived graceful restart on;
     ipv4 {
+        extended next hop on;
+        next hop self on;
         import filter {
           if is_valid_network() && !is_self_net() then {
             if (roa_check(dn42_roa, net, bgp_path.last) != ROA_VALID) then {
@@ -214,7 +219,9 @@ template bgp dnpeers {
         import limit 9000 action block;
     };
 
-    ipv6 {   
+    ipv6 {
+        extended next hop on;
+        next hop self on;   
         import filter {
           if is_valid_network_v6() && !is_self_net_v6() then {
             if (roa_check(dn42_roa_v6, net, bgp_path.last) != ROA_VALID) then {
