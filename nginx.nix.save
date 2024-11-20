@@ -7,61 +7,6 @@
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
     # other Nginx options
-    virtualHosts."routerlab1.ketamin.trade" = {
-      enableACME = true;
-      forceSSL = true;
-      basicAuth = {
-        foo = "foo";
-      };
-      locations."/" = {
-        proxyPass = "http://10.10.1.22:9001";
-        proxyWebsockets = true; # needed if you need to use WebSocket
-      };
-    };
-    virtualHosts."routerlab2.ketamin.trade" = {
-      enableACME = true;
-      forceSSL = true;
-      basicAuth = {
-        foo = "foo";
-      };
-      locations."/" = {
-        proxyPass = "http://10.10.1.22:9002";
-        proxyWebsockets = true; # needed if you need to use WebSocket
-      };
-    };
-    virtualHosts."routerlab3.ketamin.trade" = {
-      enableACME = true;
-      forceSSL = true;
-      basicAuth = {
-        foo = "foo";
-      };
-      locations."/" = {
-        proxyPass = "http://10.10.1.22:9003";
-        proxyWebsockets = true; # needed if you need to use WebSocket
-      };
-    };
-    virtualHosts."routerlab4.ketamin.trade" = {
-      enableACME = true;
-      forceSSL = true;
-      basicAuth = {
-        foo = "foo";
-      };
-      locations."/" = {
-        proxyPass = "http://10.10.1.22:9004";
-        proxyWebsockets = true; # needed if you need to use WebSocket
-      };
-    };
-    virtualHosts."routerlab5.ketamin.trade" = {
-      enableACME = true;
-      forceSSL = true;
-      basicAuth = {
-        foo = "foo";
-      };
-      locations."/" = {
-        proxyPass = "http://10.10.1.22:9005";
-        proxyWebsockets = true; # needed if you need to use WebSocket
-      };
-    };
     virtualHosts.${config.services.grafana.settings.server.domain} = {
       enableACME = true;
       forceSSL = true;
@@ -83,6 +28,49 @@
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://10.10.1.22:1100";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."routerlab1.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://10.10.1.22:9001";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+      basicAuth = {
+        ice = "diebestenmrmcdallerzeiten";
+      };
+    };
+    virtualHosts."routerlab2.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://10.10.1.22:9002";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."routerlab3.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://10.10.1.22:9003";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."routerlab4.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://10.10.1.22:9004";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."routerlab5.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://10.10.1.22:9005";
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
