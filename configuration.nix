@@ -18,9 +18,7 @@
     ./zsh.nix
     ./nextcloud.nix
     ./graphics.nix
-    #    ./dn42.nix
-    #    ./wg.nix
-    #    ./birb.nix
+    ./dn42.nix
     ./restic.nix
   ];
 

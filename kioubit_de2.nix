@@ -1,11 +1,8 @@
 # Establishes wireguard tunnels with all nodes with static IPs as hubs.
 { config, lib, ... }:
-let
-  cfg = config.machines.${config.networking.hostName}.kioubitDn42;
-in
+
 {
-  config = lib.mkIf cfg.enable {
-    age.secrets.kioubit_de2 = {
+     age.secrets.kioubit_de2 = {
       file = ./secrets/kioubit.age;
       owner = "systemd-network";
       group = "systemd-network";
@@ -58,5 +55,4 @@ in
         }
       '';
     };
-  };
 }
