@@ -2,57 +2,51 @@
 { config, lib, ... }:
 
 {
-     age.secrets.wg = {
-      file = ./secrets/kioubit.age;
-      owner = "systemd-network";
-      group = "systemd-network";
-    };
-
-    systemd.network = {
-      netdevs = {
-        "50-kioubit_de2" = {
-          netdevConfig = {
-            Kind = "wireguard";
-            Name = "kioubit_de2";
-            MTUBytes = "1420";
-          };
-          wireguardConfig = {
-            PrivateKeyFile = config.age.secrets.wg.path;
-          };
-          wireguardPeers = [
-            {
-              PublicKey = "B1xSG/XTJRLd+GrWDsB06BqnIq8Xud93YVh/LYYYtUY=";
-              AllowedIPs = [
-                "::/0"
-                "0.0.0.0/0"
-              ];
-              Endpoint = "de2.g-load.eu:20663";
-              PersistentKeepalive = 25;
-            }
-          ];
+  systemd.network = {
+    netdevs = {
+      "50-kioubit_de2" = {
+        netdevConfig = {
+          Kind = "wireguard";
+          Name = "kioubit_de2";
+          MTUBytes = "1420";
         };
-      };
-      networks.kioubit_de2 = {
-        matchConfig.Name = "kioubit_de2";
-        address = [ "fe80::ade1/64" ];
-        routes = [
+        wireguardConfig = {
+          PrivateKeyFile = config.age.secrets.wg.path;
+        };
+        wireguardPeers = [
           {
-            Destination = "fe80::ade0/128";
-            Scope = "link";
+            PublicKey = "B1xSG/XTJRLd+GrWDsB06BqnIq8Xud93YVh/LYYYtUY=";
+            AllowedIPs = [
+              "::/0"
+              "0.0.0.0/0"
+            ];
+            Endpoint = "de2.g-load.eu:20663";
+            PersistentKeepalive = 25;
           }
         ];
-        networkConfig = {
-          IPv4Forwarding = true;
-          IPv6Forwarding = true;
-        };
       };
     };
-
-    services.bird2 = {
-      config = lib.mkAfter ''
-        protocol bgp kioubit_de2 from dnpeers {
-            neighbor fe80::ade0%kioubit_de2 as 4242423914;
+    networks.kioubit_de2 = {
+      matchConfig.Name = "kioubit_de2";
+      address = [ "fe80::ade1/64" ];
+      routes = [
+        {
+          Destination = "fe80::ade0/128";
+          Scope = "link";
         }
-      '';
+      ];
+      networkConfig = {
+        IPv4Forwarding = true;
+        IPv6Forwarding = true;
+      };
     };
+  };
+
+  services.bird2 = {
+    config = lib.mkAfter ''
+      protocol bgp kioubit_de2 from dnpeers {
+          neighbor fe80::ade0%kioubit_de2 as 4242423914;
+      }
+    '';
+  };
 }

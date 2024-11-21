@@ -118,6 +118,11 @@
       group = "grafana";
       user = "grafana";
     };
+    "grafana-dashboards/bird.json" = {
+      source = ./grafana-dashboards/bird.json;
+      group = "grafana";
+      user = "grafana";
+    };
     "grafana-dashboards/unpoller.json" = {
       source = ./grafana-dashboards/unpoller.json;
       group = "grafana";
@@ -187,9 +192,9 @@
           "/dev/sdb"
         ];
       };
-     bird = {
-       enable = true;
-     };
+      bird = {
+        enable = true;
+      };
       #      exportarr-prowlarr = {
       #        enable = true;
       #        port = 51231;

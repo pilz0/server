@@ -44,6 +44,23 @@
     port = 2315;
   };
 
+  services.bird-lg = {
+    frontend = {
+      domain = "lg.ketamin.trade";
+      enable = true;
+      servers = [ "serva" ];
+      protocolFilter = [
+        "bgp"
+        "static"
+      ];
+      listenAddress = "[::1]:15000";
+      proxyPort = 18000;
+      navbar = {
+        brand = "cybertrash";
+      };
+    };
+  };
+
   services.writefreely = {
     enable = true;
     admin = {
