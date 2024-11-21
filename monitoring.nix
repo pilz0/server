@@ -187,6 +187,9 @@
           "/dev/sdb"
         ];
       };
+     bird = {
+       enable = true;
+     };
       #      exportarr-prowlarr = {
       #        enable = true;
       #        port = 51231;

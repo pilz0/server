@@ -44,7 +44,7 @@
     services.bird2 = {
       config = lib.mkAfter ''
         protocol bgp antibuilding from dnpeers {
-            neighbor fe80::acab%zebreus_dn42 as 4242420663;
+            neighbor fe80::acab%zebreus_dn42 as 4242421403;
             direct;
         }
       '';
