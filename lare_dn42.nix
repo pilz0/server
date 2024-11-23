@@ -3,10 +3,10 @@
 {
   systemd.network = {
     netdevs = {
-      "zebreus_dn42" = {
+      "dn42_lare" = {
         netdevConfig = {
           Kind = "wireguard";
-          Name = "zebreus_dn42";
+          Name = "dn42_lare";
           MTUBytes = "1420";
         };
         wireguardConfig = {
@@ -14,23 +14,22 @@
         };
         wireguardPeers = [
           {
-            PublicKey = "4UTrN0YlflDPRhH9ak5nwrZrL0IrJiZUkEUiSuboRUc=";
+            PublicKey = "OL2LE2feDsFV+fOC4vo4u/1enuxf3m2kydwGRE2rKVs=";
             AllowedIPs = [
-              "::/0"
-              "0.0.0.0/0"
+              "fe80::3035:130" "172.20.0.0/14" "172.31.0.0/16" "10.0.0.0/8" "fd00::/8"
             ];
-            Endpoint = "192.227.228.220:1";
+            Endpoint = "de01.dn42.lare.cc:20663";
             PersistentKeepalive = 25;
           }
         ];
       };
     };
-    networks.zebreus_dn42 = {
-      matchConfig.Name = "zebreus_dn42";
-      address = [ "fe80::1312/128" ];
+    networks.dn42_lare = {
+      matchConfig.Name = "dn42_lare";
+      address = [ "fe80::affe/128" ];
       routes = [
         {
-          Destination = "fe80::acab/128";
+          Destination = "fe80::3035:130/128";
           Scope = "link";
         }
       ];
@@ -43,9 +42,8 @@
 
   services.bird2 = {
     config = lib.mkAfter ''
-      protocol bgp antibuilding from dnpeers {
-          neighbor fe80::acab%zebreus_dn42 as 4242421403;
-#          direct;
+      protocol bgp d42_lare from dnpeers {
+          neighbor fe80::3035:130%dn42_lare as 4242423035;
       }
     '';
   };

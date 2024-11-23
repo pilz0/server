@@ -3,10 +3,10 @@
 {
   systemd.network = {
     netdevs = {
-      "zebreus_dn42" = {
+      "haaien_dn42" = {
         netdevConfig = {
           Kind = "wireguard";
-          Name = "zebreus_dn42";
+          Name = "haaien_dn42";
           MTUBytes = "1420";
         };
         wireguardConfig = {
@@ -14,19 +14,19 @@
         };
         wireguardPeers = [
           {
-            PublicKey = "4UTrN0YlflDPRhH9ak5nwrZrL0IrJiZUkEUiSuboRUc=";
+            PublicKey = "EsLAjyP7oYoPqMDO0nmfC3DxpyER+7yPFBaGIntr0lA=";
             AllowedIPs = [
               "::/0"
-              "0.0.0.0/0"
+ #             "0.0.0.0/0"
             ];
-            Endpoint = "192.227.228.220:1";
+            Endpoint = "hortorum.neverstable.net:42422";
             PersistentKeepalive = 25;
           }
         ];
       };
     };
-    networks.zebreus_dn42 = {
-      matchConfig.Name = "zebreus_dn42";
+    networks.haaien_dn42 = {
+      matchConfig.Name = "haaien_dn42";
       address = [ "fe80::1312/128" ];
       routes = [
         {
@@ -35,7 +35,7 @@
         }
       ];
       networkConfig = {
-        IPv4Forwarding = true;
+#        IPv4Forwarding = true;
         IPv6Forwarding = true;
       };
     };
@@ -43,9 +43,9 @@
 
   services.bird2 = {
     config = lib.mkAfter ''
-      protocol bgp antibuilding from dnpeers {
-          neighbor fe80::acab%zebreus_dn42 as 4242421403;
-#          direct;
+      protocol bgp HAAIEN_DN42 from dnpeers {
+          neighbor fe80::acab%haaien_dn42 as 4242420575;
+          direct;
       }
     '';
   };

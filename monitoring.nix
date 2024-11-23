@@ -153,6 +153,7 @@
               "tor2.ketamin.trade:9100"
               "tor3.ketamin.trade:9100"
               "localhost:9205"
+              "localhost:9324"
             ];
 
           }

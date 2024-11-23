@@ -20,6 +20,8 @@ in
   imports = [
     ./kioubit_de2.nix
     ./zebreus_dn42.nix
+    ./lare_dn42.nix
+    ./haaien.nix
   ];
   age.secrets.wg = {
     file = ./secrets/kioubit.age;

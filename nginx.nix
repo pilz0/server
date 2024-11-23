@@ -143,8 +143,8 @@
       };
     };
     virtualHosts."jellyseerr.dn42.ketamin.trade" = {
-      enableACME = true;
-      forceSSL = true;
+      enableACME = false;
+      forceSSL = false;
       locations."/" = {
         proxyPass = "http://localhost:5055";
         proxyWebsockets = true; # needed if you need to use WebSocket
@@ -183,8 +183,8 @@
       };
     };
     virtualHosts."jellyfin.dn42.ketamin.trade" = {
-      enableACME = true;
-      forceSSL = true;
+      enableACME = false;
+      forceSSL = false;
       locations."/" = {
         proxyPass = "http://localhost:8096";
         proxyWebsockets = true; # needed if you need to use WebSocket
