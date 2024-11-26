@@ -27,10 +27,10 @@
     };
     networks.zebreus_dn42 = {
       matchConfig.Name = "zebreus_dn42";
-      address = [ "fe80::1312/128" ];
+      address = [ "fe80::1312/64" ];
       routes = [
         {
-          Destination = "fe80::acab/128";
+          Destination = "fe80::acab/64";
           Scope = "link";
         }
       ];

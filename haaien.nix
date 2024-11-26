@@ -27,10 +27,10 @@
     };
     networks.haaien_dn42 = {
       matchConfig.Name = "haaien_dn42";
-      address = [ "fe80::1312/128" ];
+      address = [ "fe80::1312/64" ];
       routes = [
         {
-          Destination = "fe80::acab/128";
+          Destination = "fe80::497a/64";
           Scope = "link";
         }
       ];
@@ -43,9 +43,9 @@
 
   services.bird2 = {
     config = lib.mkAfter ''
-      protocol bgp HAAIEN_DN42 from dnpeers {
-          neighbor fe80::acab%haaien_dn42 as 4242420575;
-          direct;
+      protocol bgp haaien_dn42 from dnpeers {
+          neighbor fe80::497a%haaien_dn42 as 4242420575;
+#          direct;
       }
     '';
   };

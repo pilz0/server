@@ -29,7 +29,7 @@
       address = [ "fe80::affe/128" ];
       routes = [
         {
-          Destination = "fe80::3035:130/128";
+          Destination = "fe80::3035:130/64";
           Scope = "link";
         }
       ];
