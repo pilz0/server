@@ -20,7 +20,7 @@
               "::/0"
               "0.0.0.0/0"
             ];
-            Endpoint = "de2.g-load.eu:20663";
+            Endpoint = "116.203.141.239:20663";
             PersistentKeepalive = 25;
           }
         ];

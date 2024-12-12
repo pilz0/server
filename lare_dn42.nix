@@ -16,7 +16,11 @@
           {
             PublicKey = "OL2LE2feDsFV+fOC4vo4u/1enuxf3m2kydwGRE2rKVs=";
             AllowedIPs = [
-              "fe80::3035:130" "172.20.0.0/14" "172.31.0.0/16" "10.0.0.0/8" "fd00::/8"
+              "fe80::3035:130"
+              "172.20.0.0/14"
+              "172.31.0.0/16"
+              "10.0.0.0/8"
+              "fd00::/8"
             ];
             Endpoint = "de01.dn42.lare.cc:20663";
             PersistentKeepalive = 25;

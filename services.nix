@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  libs,
+  ...
+}:
 {
   age.secrets.writefreely = {
     file = ./secrets/writefreely.age;
@@ -15,9 +20,11 @@
   services.bazarr = {
     enable = true;
   };
-  services.sonarr = {
-    enable = true;
-  };
+  #  services.sonarr = {
+  #    enable = true;
+  #  };
+
+  # https://discourse.nixos.org/t/solved-sonarr-is-broken-in-24-11-unstable-aka-how-the-hell-do-i-use-nixpkgs-config-permittedinsecurepackages/56828
   services.lidarr = {
     enable = true;
   };
@@ -34,15 +41,15 @@
   programs.git.config.user.name = "pilz0";
   programs.git.config.user.email = "marie0@riseup.net";
 
-  services.ollama = {
-    enable = true;
-    acceleration = "cuda";
-    loadModels = [ "llama3.2" ];
-  };
-  services.open-webui = {
-    enable = true;
-    port = 2315;
-  };
+  #  services.ollama = {
+  #    enable = true;
+  #    acceleration = "cuda";
+  #    loadModels = [ "llama3.2" ];
+  #  };
+  #  services.open-webui = {
+  #    enable = true;
+  #    port = 2315;
+  #  };
 
   services.bird-lg = {
     frontend = {

@@ -30,16 +30,16 @@
       inherit (config.services.nextcloud.package.packages.apps) contacts calendar;
     };
     extraAppsEnable = true;
-   # ensureUsers = {
-   #   pilz = {
-   #     email = "marie0@riseup.net";
-   #     passwordFile = config.age.secrets.nextcloud.path;
-   #   };
-     # ${config.services.prometheus.exporters.nextcloud.username} = {
-     #   email = "nextcloud-exporter@ketamin.trade";
-     #   passwordFile = config.age.secrets.nextcloud-exporter.path;
-     # };
-   # };
+    # ensureUsers = {
+    #   pilz = {
+    #     email = "marie0@riseup.net";
+    #     passwordFile = config.age.secrets.nextcloud.path;
+    #   };
+    # ${config.services.prometheus.exporters.nextcloud.username} = {
+    #   email = "nextcloud-exporter@ketamin.trade";
+    #   passwordFile = config.age.secrets.nextcloud-exporter.path;
+    # };
+    # };
     settings = {
       mail_smtpmode = "smtp";
       mail_smtphost = "mail.cock.li";
@@ -63,7 +63,10 @@
         "[::1]"
         "${config.services.nextcloud.hostName}"
       ];
-      extraTrustedDomains = [ "${config.services.nextcloud.hostName}" "localhost" ];
+      extraTrustedDomains = [
+        "${config.services.nextcloud.hostName}"
+        "localhost"
+      ];
       overwriteProtocol = "https";
     };
   };

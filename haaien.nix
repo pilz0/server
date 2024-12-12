@@ -17,9 +17,9 @@
             PublicKey = "EsLAjyP7oYoPqMDO0nmfC3DxpyER+7yPFBaGIntr0lA=";
             AllowedIPs = [
               "::/0"
- #             "0.0.0.0/0"
+              #             "0.0.0.0/0"
             ];
-            Endpoint = "hortorum.neverstable.net:42422";
+            Endpoint = "37.120.168.131:42422";
             PersistentKeepalive = 25;
           }
         ];
@@ -35,7 +35,7 @@
         }
       ];
       networkConfig = {
-#        IPv4Forwarding = true;
+        #        IPv4Forwarding = true;
         IPv6Forwarding = true;
       };
     };
@@ -43,10 +43,10 @@
 
   services.bird2 = {
     config = lib.mkAfter ''
-      protocol bgp haaien_dn42 from dnpeers {
-          neighbor fe80::497a%haaien_dn42 as 4242420575;
-#          direct;
-      }
+            protocol bgp haaien_dn42 from dnpeers {
+                neighbor fe80::497a%haaien_dn42 as 4242420575;
+      #          direct;
+            }
     '';
   };
 }

@@ -166,6 +166,58 @@
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
+    virtualHosts."vm1.serva.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      extraConfig = ''
+        allow 130.83.0.0/16; # TU-Darmstadt | AS8365
+        allow 82.195.64.0/19; # Man-da | AS8365
+        deny all;
+      '';
+      locations."/" = {
+        proxyPass = "http://10.10.1.22:6901";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."vm2.serva.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      extraConfig = ''
+        allow 130.83.0.0/16; # TU-Darmstadt | AS8365
+        allow 82.195.64.0/19; # Man-da | AS8365
+        deny all;
+      '';
+      locations."/" = {
+        proxyPass = "http://10.10.1.22:6902";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."vm3.serva.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      extraConfig = ''
+        allow 130.83.0.0/16; # TU-Darmstadt | AS8365
+        allow 82.195.64.0/19; # Man-da | AS8365
+        deny all;
+      '';
+      locations."/" = {
+        proxyPass = "http://10.10.1.22:6903";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."vm4.serva.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      extraConfig = ''
+        allow 130.83.0.0/16; # TU-Darmstadt | AS8365
+        allow 82.195.64.0/19; # Man-da | AS8365
+        deny all;
+      '';
+      locations."/" = {
+        proxyPass = "http://10.10.1.22:6904";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
     virtualHosts."ai.ketamin.trade" = {
       enableACME = true;
       forceSSL = true;

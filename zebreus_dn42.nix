@@ -30,7 +30,7 @@
       address = [ "fe80::1312/64" ];
       routes = [
         {
-          Destination = "fe80::acab/64";
+          Destination = "fe80::acab/128";
           Scope = "link";
         }
       ];
@@ -43,10 +43,10 @@
 
   services.bird2 = {
     config = lib.mkAfter ''
-      protocol bgp antibuilding from dnpeers {
-          neighbor fe80::acab%zebreus_dn42 as 4242421403;
-#          direct;
-      }
+            protocol bgp antibuilding from dnpeers {
+                neighbor fe80::acab%zebreus_dn42 as 4242421403;
+      #          direct;
+            }
     '';
   };
 }
