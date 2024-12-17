@@ -5,6 +5,11 @@
   ...
 }:
 {
+  age.secrets.mailpw = {
+    file = ./secrets/smtp.age;
+    owner = "mastodon";
+    group = "mastodon";
+  };
   age.secrets.writefreely = {
     file = ./secrets/writefreely.age;
     owner = "writefreely";
@@ -20,9 +25,9 @@
   services.bazarr = {
     enable = true;
   };
-  #  services.sonarr = {
-  #    enable = true;
-  #  };
+  services.sonarr = {
+    enable = true;
+  };
 
   # https://discourse.nixos.org/t/solved-sonarr-is-broken-in-24-11-unstable-aka-how-the-hell-do-i-use-nixpkgs-config-permittedinsecurepackages/56828
   services.lidarr = {
@@ -41,15 +46,15 @@
   programs.git.config.user.name = "pilz0";
   programs.git.config.user.email = "marie0@riseup.net";
 
-  #  services.ollama = {
-  #    enable = true;
-  #    acceleration = "cuda";
-  #    loadModels = [ "llama3.2" ];
-  #  };
-  #  services.open-webui = {
-  #    enable = true;
-  #    port = 2315;
-  #  };
+  #    services.ollama = {
+  #      enable = true;
+  #      acceleration = "cuda";
+  #      loadModels = [ "llama3.2" ];
+  #    };
+  #    services.open-webui = {
+  #      enable = true;
+  #      port = 2315;
+  #    };
 
   services.bird-lg = {
     frontend = {
@@ -88,5 +93,24 @@
     acme = {
       enable = true;
     };
+  };
+  services.mastodon = {
+    enable = true;
+    localDomain = "m.ketamin.trade"; # Replace with your own domain
+    configureNginx = true;
+    smtp = {
+      fromAddress = "t3st1ng1312@cock.li"; # Email address used by Mastodon to send emails, replace with your own
+      user = "t3st1ng1312@cock.li";
+      passwordFile = config.age.secrets.mailpw.path;
+      host = "mail.cock.li";
+      authenticate = true;
+      createLocally = false;
+      port = 465;
+    };
+    streamingProcesses = 2; # Number of processes used by the mastodon-streaming service. recommended is the amount of your CPU cores minus one.
+  };
+  services.postgresqlBackup = {
+    enable = true;
+    databases = [ "mastodon" ];
   };
 }
