@@ -263,6 +263,257 @@
     };
   };
 
+  virtualHosts."routerlab1.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    basicAuth = {
+      foo = "foo";
+    };
+    locations."/" = {
+      proxyPass = "http://10.10.1.22:9001";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."routerlab2.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    basicAuth = {
+      foo = "foo";
+    };
+    locations."/" = {
+      proxyPass = "http://10.10.1.22:9002";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."routerlab3.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    basicAuth = {
+      foo = "foo";
+    };
+    locations."/" = {
+      proxyPass = "http://10.10.1.22:9003";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."routerlab4.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    basicAuth = {
+      foo = "foo";
+    };
+    locations."/" = {
+      proxyPass = "http://10.10.1.22:9004";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."routerlab5.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    basicAuth = {
+      foo = "foo";
+    };
+    locations."/" = {
+      proxyPass = "http://10.10.1.22:9005";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts.${config.services.grafana.settings.server.domain} = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://localhost:3001";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."caffeine.mom" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://localhost:8096";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."cloud.fffda.lol" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://10.10.1.22:1100";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."unifi.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://localhost:8443";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."radarr.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://localhost:7878";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."bazarr.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://localhost:6767";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."sonarr.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://localhost:8989";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."prowlarr.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://localhost:9696";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."lidarr.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://localhost:8686";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."jellyseerr.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://localhost:5055";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."jellyseerr.dn42.pilz.foo" = {
+    enableACME = false;
+    forceSSL = false;
+    locations."/" = {
+      proxyPass = "http://localhost:5055";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."lists.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://localhost:61015";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."torrent.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://10.10.1.22:8090";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."vm1.serva.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    extraConfig = ''
+      allow 130.83.0.0/16; # TU-Darmstadt | AS8365
+      allow 82.195.64.0/19; # Man-da | AS8365
+      deny all;
+    '';
+    locations."/" = {
+      proxyPass = "http://10.10.1.22:6901";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."vm2.serva.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    extraConfig = ''
+      allow 130.83.0.0/16; # TU-Darmstadt | AS8365
+      allow 82.195.64.0/19; # Man-da | AS8365
+      deny all;
+    '';
+    locations."/" = {
+      proxyPass = "http://10.10.1.22:6902";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."vm3.serva.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    extraConfig = ''
+      allow 130.83.0.0/16; # TU-Darmstadt | AS8365
+      allow 82.195.64.0/19; # Man-da | AS8365
+      deny all;
+    '';
+    locations."/" = {
+      proxyPass = "http://10.10.1.22:6903";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."vm4.serva.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    extraConfig = ''
+      allow 130.83.0.0/16; # TU-Darmstadt | AS8365
+      allow 82.195.64.0/19; # Man-da | AS8365
+      deny all;
+    '';
+    locations."/" = {
+      proxyPass = "http://10.10.1.22:6904";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."ai.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://localhost:2315";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."jellyfin.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://localhost:8096";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."jellyfin.dn42.pilz.foo" = {
+    enableACME = false;
+    forceSSL = false;
+    locations."/" = {
+      proxyPass = "http://localhost:8096";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."lg.pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://[::1]:15000";
+      proxyWebsockets = true; # needed if you need to use WebSocket
+    };
+  };
+  virtualHosts."pilz.foo" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      return = "302 https://blog.pilz.foo";
+    };
+  };
+
   security.acme = {
     acceptTerms = true;
     defaults.email = "acme@ketamin.trade";

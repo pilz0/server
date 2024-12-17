@@ -16,6 +16,8 @@
   networking.extraHosts = ''
     127.0.0.1 cloud.ketamin.trade
     172.22.179.129 serva.lg.ketamin.trade
+    127.0.0.1 cloud.pilz.foo
+    172.22.179.129 serva.lg.pilz.foo
   '';
   services.unpoller = {
     #   enable = true;

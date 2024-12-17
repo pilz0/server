@@ -22,7 +22,7 @@
     enable = true;
     configureRedis = true;
     package = pkgs.nextcloud30;
-    hostName = "cloud.ketamin.trade";
+    hostName = "cloud.pilz.foo";
     appstoreEnable = true;
     autoUpdateApps.enable = true;
     database.createLocally = true;
