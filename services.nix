@@ -16,30 +16,6 @@
     group = "writefreely";
   };
 
-  services.jellyfin = {
-    enable = true;
-  };
-  services.radarr = {
-    enable = true;
-  };
-  services.bazarr = {
-    enable = true;
-  };
-  services.sonarr = {
-    enable = true;
-  };
-
-  # https://discourse.nixos.org/t/solved-sonarr-is-broken-in-24-11-unstable-aka-how-the-hell-do-i-use-nixpkgs-config-permittedinsecurepackages/56828
-  services.lidarr = {
-    enable = true;
-  };
-  services.prowlarr = {
-    enable = true;
-  };
-  services.jellyseerr = {
-    enable = true;
-  };
-
   virtualisation.docker.enable = true;
   virtualisation.containerd.enable = true;
   services.tailscale.enable = true;

@@ -2,13 +2,12 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     agenix.url = "github:ryantm/agenix";
-    nixarr.url = "github:rasmus-kirk/nixarr";
+          nixarr.url = "github:rasmus-kirk/nixarr";
   };
   outputs =
     {
       nixpkgs,
       agenix,
-      nixarr,
       ...
     }:
     {
@@ -19,7 +18,6 @@
           modules = [
             ./configuration.nix
             agenix.nixosModules.default
-            nixarr.nixosModules.default
             {
               environment.systemPackages = [ agenix.packages.x86_64-linux.default ];
             }

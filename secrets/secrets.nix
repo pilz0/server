@@ -69,4 +69,10 @@ in
     marieunderdesk
     serva
   ];
+  "nixarr-wg.age".publicKeys = [
+    marielap
+    marie
+    marieunderdesk
+    serva
+  ];
 }

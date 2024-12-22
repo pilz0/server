@@ -20,6 +20,7 @@
     ./graphics.nix
     ./dn42.nix
     ./restic.nix
+    ./nixarr.nix
   ];
 
   environment.systemPackages = with pkgs; [

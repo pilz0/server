@@ -17,7 +17,7 @@
             PublicKey = "EsLAjyP7oYoPqMDO0nmfC3DxpyER+7yPFBaGIntr0lA=";
             AllowedIPs = [
               "::/0"
-              #             "0.0.0.0/0"
+              "0.0.0.0/0"
             ];
             Endpoint = "37.120.168.131:42422";
             PersistentKeepalive = 25;

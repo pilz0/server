@@ -16,7 +16,7 @@
           {
             PublicKey = "OL2LE2feDsFV+fOC4vo4u/1enuxf3m2kydwGRE2rKVs=";
             AllowedIPs = [
-              "fe80::3035:130"
+              "fe80::3035:130/64"
               "172.20.0.0/14"
               "172.31.0.0/16"
               "10.0.0.0/8"
@@ -30,7 +30,7 @@
     };
     networks.dn42_lare = {
       matchConfig.Name = "dn42_lare";
-      address = [ "fe80::affe/128" ];
+      address = [ "fe80::affe/64" ];
       routes = [
         {
           Destination = "fe80::3035:130/64";
