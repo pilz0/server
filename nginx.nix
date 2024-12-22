@@ -1,12 +1,46 @@
 { pkgs, config, ... }:
 {
+    security.acme = {
+    acceptTerms = true;
+    defaults.email = "acme@ketamin.trade";
+  };
   services.nginx = {
     enable = true;
     recommendedGzipSettings = true;
     recommendedOptimisation = true;
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
-    # other Nginx options
+    ## Other Zones
+      virtualHosts."caffeine.mom" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://localhost:8096";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+      virtualHosts."cloud.fffda.lol" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://10.10.1.22:1100";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+      virtualHosts.${config.services.nextcloud.hostName} = {
+      forceSSL = true;
+      enableACME = true;
+    };
+    virtualHosts.${config.services.grafana.settings.server.domain} = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://localhost:3001";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+
+    ## Zone ketamin.trade 
     virtualHosts."routerlab1.ketamin.trade" = {
       enableACME = true;
       forceSSL = true;
@@ -59,22 +93,6 @@
       };
       locations."/" = {
         proxyPass = "http://10.10.1.22:9005";
-        proxyWebsockets = true; # needed if you need to use WebSocket
-      };
-    };
-    virtualHosts.${config.services.grafana.settings.server.domain} = {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://localhost:3001";
-        proxyWebsockets = true; # needed if you need to use WebSocket
-      };
-    };
-    virtualHosts."cloud.fffda.lol" = {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://10.10.1.22:1100";
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
@@ -249,11 +267,7 @@
         return = "302 https://blog.ketamin.trade";
       };
     };
-    virtualHosts.${config.services.nextcloud.hostName} = {
-      forceSSL = true;
-      enableACME = true;
-    };
-
+    ## Zone pilz.foo
     virtualHosts."routerlab1.pilz.foo" = {
       enableACME = true;
       forceSSL = true;
@@ -306,14 +320,6 @@
       };
       locations."/" = {
         proxyPass = "http://10.10.1.22:9005";
-        proxyWebsockets = true; # needed if you need to use WebSocket
-      };
-    };
-    virtualHosts."caffeine.mom" = {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://localhost:8096";
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
@@ -488,9 +494,5 @@
         return = "302 https://blog.pilz.foo";
       };
     };
-  };
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "acme@ketamin.trade";
   };
 }
