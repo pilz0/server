@@ -21,6 +21,12 @@ in
     marieunderdesk
     serva
   ];
+  "nextcloud-secrets.age".publicKeys = [
+    marielap
+    marie
+    marieunderdesk
+    serva
+  ];
   "rclone.age".publicKeys = [
     marielap
     marie

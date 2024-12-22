@@ -70,7 +70,7 @@
         enabled = true;
         user = "t3st1ng1312@cock.li";
         startTLS_policy = "MandatoryStartTLS";
-        password = builtins.readFile config.age.secrets.smtp.path;
+        password = "$__file{${toString config.age.secrets.smtp.path}}";
         host = "mail.cock.li:465";
         from_name = config.services.grafana.settings.server.domain;
         from_address = config.services.grafana.settings.smtp.user;
@@ -86,7 +86,7 @@
         org_role = "Viewer";
       };
       security = {
-        admin_password = builtins.readFile config.age.secrets.grafana.path;
+        admin_password = "$__file{${toString config.age.secrets.grafana.path}}";
         admin_user = "admin";
         admin_email = "marie0@riseup.net";
       };
@@ -214,6 +214,10 @@
         enable = true;
         port = 9121;
         extraFlags = [ "--redis.addr=127.0.0.1:${toString config.services.mastodon.redis.port}" ];
+      };
+      wireguard = {
+        enable = true;
+        withRemoteIp = true;
       };
     };
   };

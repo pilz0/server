@@ -1,6 +1,6 @@
-{ pkgs, config, ... }:
+{ config, ... }:
 {
-    security.acme = {
+  security.acme = {
     acceptTerms = true;
     defaults.email = "acme@ketamin.trade";
   };
@@ -11,7 +11,7 @@
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
     ## Other Zones
-      virtualHosts."caffeine.mom" = {
+    virtualHosts."caffeine.mom" = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {
@@ -19,7 +19,7 @@
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
-      virtualHosts."cloud.fffda.lol" = {
+    virtualHosts."cloud.fffda.lol" = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {
@@ -27,7 +27,7 @@
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
-      virtualHosts.${config.services.nextcloud.hostName} = {
+    virtualHosts.${config.services.nextcloud.hostName} = {
       forceSSL = true;
       enableACME = true;
     };
@@ -40,7 +40,7 @@
       };
     };
 
-    ## Zone ketamin.trade 
+    ## Zone ketamin.trade
     virtualHosts."routerlab1.ketamin.trade" = {
       enableACME = true;
       forceSSL = true;
@@ -133,6 +133,14 @@
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://localhost:9696";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."readarr.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://localhost:8787";
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
@@ -360,6 +368,14 @@
       forceSSL = true;
       locations."/" = {
         proxyPass = "http://localhost:9696";
+        proxyWebsockets = true; # needed if you need to use WebSocket
+      };
+    };
+    virtualHosts."readarr.pilz.foo" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://localhost:8787";
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };

@@ -18,6 +18,11 @@
     owner = "nextcloud";
     group = "nextcloud";
   };
+  age.secrets.nextcloud-secrets = {
+    file = ./secrets/nextcloud-secrets.age;
+    owner = "nextcloud";
+    group = "nextcloud";
+  };
   services.nextcloud = {
     enable = true;
     configureRedis = true;
@@ -26,6 +31,7 @@
     appstoreEnable = true;
     autoUpdateApps.enable = true;
     database.createLocally = true;
+    secretFile = config.age.secrets.nextcloud-secrets.path;
     extraApps = {
       inherit (config.services.nextcloud.package.packages.apps) contacts calendar;
     };
@@ -50,7 +56,7 @@
       mail_smtpname = "t3st1ng1312@cock.li";
       mail_domain = "cock.li";
       mail_from_address = "t3st1ng1312";
-      mail_smtppassword = builtins.readFile config.age.secrets.smtpnextcloud.path;
+      # mail_smtppassword = builtins.readFile config.age.secrets.smtpnextcloud.path; # set via secretfile
     };
     config = {
       adminpassFile = config.age.secrets.nextcloud.path;
