@@ -108,11 +108,6 @@
       group = "grafana";
       user = "grafana";
     };
-    "grafana-dashboards/qbittorrent.json" = {
-      source = ./grafana-dashboards/qbittorrent.json;
-      group = "grafana";
-      user = "grafana";
-    };
     "grafana-dashboards/smartctl.json" = {
       source = ./grafana-dashboards/smartctl.json;
       group = "grafana";
@@ -162,6 +157,7 @@
               "localhost:9324"
               "localhost:9121"
               "localhost:9187"
+              "localhost:9586"
             ];
 
           }
