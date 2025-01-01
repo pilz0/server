@@ -25,6 +25,17 @@
     owner = "prometheus";
     group = "prometheus";
   };
+
+  services.smokeping = {
+    enable = true;
+    host = null;
+    owner = "Pilz";
+    hostName = "smokeping.pilz.foo";
+    cgiUrl = "https://${hostName}/smokeping.cgi";
+    imgUrl = "https://${hostName}/cache";
+    ownerEmail = "smokeping@pilz.foo";
+  };
+
   services.grafana = {
     enable = true;
     declarativePlugins = with pkgs.grafanaPlugins; [
@@ -218,6 +229,11 @@
       wireguard = {
         enable = true;
         withRemoteIp = true;
+      };
+      smokeping = {
+        hosts = [
+
+        ];
       };
     };
   };
