@@ -119,11 +119,6 @@
       group = "grafana";
       user = "grafana";
     };
-    "grafana-dashboards/qbittorrent.json" = {
-      source = ./grafana-dashboards/qbittorrent.json;
-      group = "grafana";
-      user = "grafana";
-    };
     "grafana-dashboards/smartctl.json" = {
       source = ./grafana-dashboards/smartctl.json;
       group = "grafana";
@@ -169,10 +164,13 @@
               "tor1.ketamin.trade:9100"
               "tor2.ketamin.trade:9100"
               "tor3.ketamin.trade:9100"
+              "tor1.catgirl.dog:9100"
+              "tor2.catgirl.dog:9100"
               "localhost:9205"
               "localhost:9324"
               "localhost:9121"
               "localhost:9187"
+              "localhost:9586"
             ];
 
           }

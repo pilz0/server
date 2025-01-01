@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 19,
+  "id": 31,
   "links": [
     {
       "asDropdown": false,
@@ -43,6 +43,18 @@
       "tooltip": "",
       "type": "link",
       "url": "https://lg.antibuild.ing"
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": false,
+      "title": "Lare Looking Glass",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://lg.lare.cc/"
     }
   ],
   "panels": [
@@ -67,7 +79,7 @@
         "content": "<h1> Infos </h1>\nASN: AS4242420663 <br>\nAS-NAME: AS-CYBERTRASH-DN42 <br>\nIPv6: fd49:d69f:6::/48 <br>\nIPv4: 172.22.179.128/27 <br>\nNOC Contact: noc@ketamin.trade <br>\nPeering requests are welcome <br>\nLooking Glass (if it isnt broken):<a href=\"https://lg.ketamin.trade/\"> lg.ketamin.trade </a>\n",
         "mode": "html"
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "11.3.2",
       "title": "",
       "type": "text"
     },
@@ -90,7 +102,7 @@
             "barAlignment": 0,
             "barWidthFactor": 0.6,
             "drawStyle": "line",
-            "fillOpacity": 0,
+            "fillOpacity": 25,
             "gradientMode": "none",
             "hideFrom": {
               "legend": false,
@@ -99,6 +111,9 @@
             },
             "insertNulls": false,
             "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -128,7 +143,7 @@
               }
             ]
           },
-          "unit": "decbits"
+          "unit": "bps"
         },
         "overrides": [
           {
@@ -164,7 +179,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -358,7 +373,7 @@
           "sort": "desc"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -543,7 +558,7 @@
           "sort": "desc"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -564,6 +579,135 @@
         }
       ],
       "title": "Bird Prefix export Count IPv4",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e68e5107-0b44-4438-870c-019649e85d2b"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 25,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*send.*/"
+            },
+            "properties": [
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.2",
+      "targets": [
+        {
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "irate(wireguard_received_bytes_total [$__rate_interval]) * 8",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "received {{interface}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "e68e5107-0b44-4438-870c-019649e85d2b"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "irate(wireguard_sent_bytes_total [$__rate_interval]) * 8",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "send {{interface}}",
+          "range": true,
+          "refId": "B",
+          "useBackend": false
+        }
+      ],
+      "title": "Wireguard Traffic",
       "type": "timeseries"
     },
     {
@@ -709,7 +853,7 @@
         ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 6,
         "x": 0,
         "y": 14
@@ -730,7 +874,7 @@
           "sort": "desc"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -896,7 +1040,7 @@
         ]
       },
       "gridPos": {
-        "h": 6,
+        "h": 7,
         "w": 6,
         "x": 6,
         "y": 14
@@ -917,7 +1061,7 @@
           "sort": "desc"
         }
       },
-      "pluginVersion": "11.4.0",
+      "pluginVersion": "11.3.2",
       "targets": [
         {
           "datasource": {
@@ -939,6 +1083,78 @@
       ],
       "title": "Bird Prefix Import Count IPv6",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "e68e5107-0b44-4438-870c-019649e85d2b"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byRegexp",
+              "options": "/.*/"
+            },
+            "properties": []
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 15
+      },
+      "id": 8,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.3.2",
+      "targets": [
+        {
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "(wireguard_latest_handshake_seconds - time())",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "interval": "",
+          "legendFormat": "{{interface}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "last wireguard handshake",
+      "type": "gauge"
     }
   ],
   "preload": false,
@@ -948,13 +1164,13 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "DN42",
-  "uid": "be5jvist2zfnkf",
-  "version": 13,
+  "uid": "be5jvist2zfnke",
+  "version": 14,
   "weekStart": ""
 }

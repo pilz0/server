@@ -27,6 +27,13 @@
         proxyWebsockets = true; # needed if you need to use WebSocket
       };
     };
+    virtualHosts."grafana.ketamin.trade" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        return = "302 https://grafana.pilz.foo";
+      };
+    };
     virtualHosts.${config.services.nextcloud.hostName} = {
       forceSSL = true;
       enableACME = true;

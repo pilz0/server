@@ -21,6 +21,10 @@
       enable = true;
       vpn.enable = true;
       peerPort = 63993; # Set this to the port forwarded by your VPN
+      extraSettings = {
+    speed-limit-up-enabled = true;
+    speed-limit-up = 9000;
+    };
     };
 
     bazarr.enable = true;

@@ -7,7 +7,7 @@
         netdevConfig = {
           Kind = "wireguard";
           Name = "haaien_dn42";
-          MTUBytes = "1420";
+          MTUBytes = "1350";
         };
         wireguardConfig = {
           PrivateKeyFile = config.age.secrets.wg.path;
