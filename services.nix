@@ -87,6 +87,9 @@
   };
   services.postgresqlBackup = {
     enable = true;
-    databases = [ "mastodon" ];
+    databases = [
+      "mastodon"
+      "nextcloud"
+    ];
   };
 }

@@ -26,16 +26,6 @@
     group = "prometheus";
   };
 
-  services.smokeping = {
-    enable = true;
-    host = null;
-    owner = "Pilz";
-    hostName = "smokeping.pilz.foo";
-    cgiUrl = "https://${hostName}/smokeping.cgi";
-    imgUrl = "https://${hostName}/cache";
-    ownerEmail = "smokeping@pilz.foo";
-  };
-
   services.grafana = {
     enable = true;
     declarativePlugins = with pkgs.grafanaPlugins; [
@@ -154,23 +144,23 @@
         static_configs = [
           {
             targets = [
-              "10.10.1.25:9100"
+              "10.10.1.25:${toString config.services.prometheus.exporters.node.port}"
               "10.10.1.22:17871"
-              "shit.ketamin.trade:9100"
               "localhost:${toString config.services.prometheus.exporters.node.port}"
-              "localhost:9753"
-              "localhost:9633"
-              "localhost:9708"
-              "tor1.ketamin.trade:9100"
-              "tor2.ketamin.trade:9100"
-              "tor3.ketamin.trade:9100"
-              "tor1.catgirl.dog:9100"
-              "tor2.catgirl.dog:9100"
-              "localhost:9205"
-              "localhost:9324"
-              "localhost:9121"
-              "localhost:9187"
-              "localhost:9586"
+              "localhost:${toString config.services.prometheus.exporters.restic.port}"
+              "shit.ketamin.trade:${toString config.services.prometheus.exporters.node.port}"
+              "tor1.ketamin.trade:${toString config.services.prometheus.exporters.node.port}"
+              "tor2.ketamin.trade:${toString config.services.prometheus.exporters.node.port}"
+              "tor3.ketamin.trade:${toString config.services.prometheus.exporters.node.port}"
+              "tor1.catgirl.dog:${toString config.services.prometheus.exporters.node.port}"
+              "tor2.catgirl.dog:${toString config.services.prometheus.exporters.node.port}"
+              "localhost:${toString config.services.prometheus.exporters.smartctl.port}"
+              "localhost:${toString config.services.prometheus.exporters.node.port}"
+              "localhost:${toString config.services.prometheus.exporters.bird.port}"
+              "localhost:${toString config.services.prometheus.exporters.redis.port}"
+              "localhost:${toString config.services.prometheus.exporters.postgres.port}"
+              "localhost:${toString config.services.prometheus.exporters.wireguard.port}"
+              "localhost:${toString config.services.prometheus.exporters.smokeping.port}"
             ];
 
           }
@@ -229,8 +219,19 @@
         withRemoteIp = true;
       };
       smokeping = {
+        enable = true;
         hosts = [
-
+          "localhost"
+          "tor1.ketamin.trade"
+          "tor2.ketamin.trade"
+          "tor3.ketamin.trade"
+          "tor1.catgirl.dog"
+          "tor2.catgirl.dog"
+          "10.10.1.25"
+          "1.1.1.1"
+          "catgirl.dog"
+          "google.com"
+          "ip6.clerie.de"
         ];
       };
     };
