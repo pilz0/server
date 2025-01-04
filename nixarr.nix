@@ -23,7 +23,7 @@
       peerPort = 63993; # Set this to the port forwarded by your VPN
       extraSettings = {
     speed-limit-up-enabled = true;
-    speed-limit-up = 9000;
+    speed-limit-up = 700;
     };
     };
 
