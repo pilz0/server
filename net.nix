@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   # services.unifi = {
   #   enable = true;
