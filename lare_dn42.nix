@@ -44,7 +44,7 @@
 
   services.bird2 = {
     config = lib.mkAfter ''
-      protocol bgp d42_lare from dnpeers {
+      protocol bgp dn42_lare from dnpeers {
           neighbor fe80::3035:130%dn42_lare as 4242423035;
       }
     '';

@@ -32,28 +32,6 @@
   #      port = 2315;
   #    };
 
-  services.bird-lg = {
-    proxy = {
-        enable = true;
-        listenAddress = "172.22.179.129:18000";
-        allowedIPs = [ "172.0.0.0/8" ];
-    };
-    frontend = {
-      domain = "lg.ketamin.trade";
-      enable = true;
-      servers = [ "serva" ];
-      protocolFilter = [
-        "bgp"
-        "static"
-      ];
-      listenAddress = "[::1]:15000";
-      proxyPort = 18000;
-      navbar = {
-        brand = "cybertrash";
-      };
-    };
-  };
-
   services.writefreely = {
     enable = true;
     admin = {
