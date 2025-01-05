@@ -9,8 +9,9 @@
   #services.unifi.mongodbPackage = pkgs.mongodb-7_0;
   networking.networkmanager.enable = true;
   networking.nameservers = [
+    "::1"
+    "127.0.0.1"
     "1.1.1.1"
-    "9.9.9.9"
   ];
   networking.hostName = "serva";
   networking.extraHosts = ''
