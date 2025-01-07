@@ -36,6 +36,18 @@
   services.unbound = {
     enable = true;
     settings = {
+      options = {
+        empty-zones-enable = "no";
+        validate-except = [
+          "dn42"
+          "20.172.in-addr.arpa"
+          "21.172.in-addr.arpa"
+          "22.172.in-addr.arpa"
+          "23.172.in-addr.arpa"
+          "10.in-addr.arpa"
+          "d.f.ip6.arpa"
+        ];
+      };
       server = {
         local-zone = [
           "20.172.in-addr.arpa. nodefault"
@@ -48,14 +60,14 @@
         interface = [
           "127.0.0.1"
           "::1"
-	  "fd49:d69f:6::1337"
+          "fd49:d69f:6::1337"
+          "172.22.179.129"
         ];
         port = 53;
         access-control = [
           "0.0.0.0/0 allow"
           "::1/0 allow"
         ];
-        # Based on recommended settings in https://docs.pi-hole.net/guides/dns/unbound/#configure-unbound
         harden-glue = true;
         harden-dnssec-stripped = true;
         use-caps-for-id = false;
@@ -65,6 +77,7 @@
       forward-zone = [
         {
           name = "dn42";
+          type = "forward";
           forward-addr = [
             "fd42:d42:d42:54::1"
             "172.20.0.53"
@@ -72,6 +85,7 @@
         }
         {
           name = "20.172.in-addr.arpa";
+          type = "forward";
           forward-addr = [
             "fd42:d42:d42:54::1"
             "172.20.0.53"
@@ -79,6 +93,7 @@
         }
         {
           name = "21.172.in-addr.arpa";
+          type = "forward";
           forward-addr = [
             "fd42:d42:d42:54::1"
             "172.20.0.53"
@@ -86,6 +101,7 @@
         }
         {
           name = "22.172.in-addr.arpa";
+          type = "forward";
           forward-addr = [
             "fd42:d42:d42:54::1"
             "172.20.0.53"
@@ -93,6 +109,7 @@
         }
         {
           name = "23.172.in-addr.arpa";
+          type = "forward";
           forward-addr = [
             "fd42:d42:d42:54::1"
             "172.20.0.53"
@@ -100,6 +117,7 @@
         }
         {
           name = "10.in-addr.arpa";
+          type = "forward";
           forward-addr = [
             "fd42:d42:d42:54::1"
             "172.20.0.53"
@@ -107,21 +125,22 @@
         }
         {
           name = "d.f.ip6.arpa";
+          type = "forward";
           forward-addr = [
             "fd42:d42:d42:54::1"
             "172.20.0.53"
           ];
         }
-#        {
-#          name = ".";
-#          forward-addr = [
-#           "2606:4700:4700::1111#cloudflare-dns.com"
-#            "2620:fe::fe#dns.quad9.net"
-#            "1.1.1.1#cloudflare-dns.com"
-#            "9.9.9.9#dns.quad9.net"
-#          ];
-#          forward-tls-upstream = true; # Protected DNS
-#        }
+        #        {
+        #          name = ".";
+        #          forward-addr = [
+        #           "2606:4700:4700::1111#cloudflare-dns.com"
+        #            "2620:fe::fe#dns.quad9.net"
+        #            "1.1.1.1#cloudflare-dns.com"
+        #            "9.9.9.9#dns.quad9.net"
+        #          ];
+        #          forward-tls-upstream = true; # Protected DNS
+        #        }
       ];
     };
   };
