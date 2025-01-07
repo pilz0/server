@@ -668,6 +668,8 @@
     virtualHosts."jellyfin.dn42.pilz.foo" = {
       enableACME = false;
       forceSSL = false;
+      addSSL = false;
+      onlySSL = false;      
       locations."/" = {
         proxyPass = "http://localhost:8096";
         proxyWebsockets = true; # needed if you need to use WebSocket

@@ -31,7 +31,7 @@
       address = [ "fe80::ade1/64" ];
       routes = [
         {
-          Destination = "fe80::ade0/128";
+          Destination = "fe80::ade0/64";
           Scope = "link";
         }
       ];

@@ -46,8 +46,9 @@
           "d.f.ip6.arpa. nodefault"
         ];
         interface = [
-          "0.0.0.0/0"
-          "::/0"
+          "127.0.0.1"
+          "::1"
+	  "fd49:d69f:6::1337"
         ];
         port = 53;
         access-control = [
@@ -111,16 +112,16 @@
             "172.20.0.53"
           ];
         }
-        {
-          name = ".";
-          forward-addr = [
-            "2606:4700:4700::1111#cloudflare-dns.com"
-            "2620:fe::fe#dns.quad9.net"
-            "1.1.1.1#cloudflare-dns.com"
-            "9.9.9.9#dns.quad9.net"
-          ];
-          forward-tls-upstream = true; # Protected DNS
-        }
+#        {
+#          name = ".";
+#          forward-addr = [
+#           "2606:4700:4700::1111#cloudflare-dns.com"
+#            "2620:fe::fe#dns.quad9.net"
+#            "1.1.1.1#cloudflare-dns.com"
+#            "9.9.9.9#dns.quad9.net"
+#          ];
+#          forward-tls-upstream = true; # Protected DNS
+#        }
       ];
     };
   };
@@ -128,6 +129,7 @@
   networking.firewall = {
     allowedTCPPorts = [
       22 # ssh
+      53 # DNS
       80 # http
       443 # https
       179 # bgp
@@ -144,6 +146,7 @@
     ];
     allowedUDPPorts = [
       22 # ssh
+      53 # DNS
       80 # http
       443 # https
       179 # bgp
