@@ -33,6 +33,7 @@
       grafana-clock-panel
       grafana-oncall-app
       grafana-piechart-panel
+      yesoreyeram-infinity-datasource
     ];
     provision = {
       enable = true;

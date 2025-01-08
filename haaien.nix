@@ -45,7 +45,6 @@
     config = lib.mkAfter ''
             protocol bgp haaien_dn42 from dnpeers {
                 neighbor fe80::497a%haaien_dn42 as 4242420575;
-      #          direct;
             }
     '';
   };

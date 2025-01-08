@@ -14,13 +14,13 @@
         };
         wireguardPeers = [
           {
-            PublicKey = "OL2LE2feDsFV+fOC4vo4u/1enuxf3m2kydwGRE2rKVs=";
+            PublicKey = "dwtxXvpgWCGtX/QKFDaLXsWYRPd08Tg1JGsvzLudgjw=";
             AllowedIPs = [
               "::/0"
               "0.0.0.0/0"
 
             ];
-            Endpoint = "de01.dn42.lare.cc:20663";
+            Endpoint = "de02.dn42.lare.cc:20663";
             PersistentKeepalive = 25;
           }
         ];
@@ -28,10 +28,10 @@
     };
     networks.dn42_lare = {
       matchConfig.Name = "dn42_lare";
-      address = [ "fe80::affe" ];
+      address = [ "fe80::1312/64" ];
       routes = [
         {
-          Destination = "fe80::3035:130";
+          Destination = "fe80::3035:131/64";
           Scope = "link";
         }
       ];
@@ -45,7 +45,7 @@
   services.bird2 = {
     config = lib.mkAfter ''
       protocol bgp dn42_lare from dnpeers {
-          neighbor fe80::3035:130%dn42_lare as 4242423035;
+          neighbor fe80::3035:131%dn42_lare as 4242423035;
       }
     '';
   };
